@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:orderapp/components/areaPopup.dart';
 import 'package:orderapp/components/commoncolor.dart';
 import 'package:orderapp/controller/controller.dart';
+import 'package:orderapp/screen/ORDER/6_customer_creation.dart';
+import 'package:orderapp/screen/ORDER/6_orderForm.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,12 +30,15 @@ class _MainDashboardState extends State<MainDashboard> {
   List<String> s = [];
   AreaSelectionPopup popup = AreaSelectionPopup();
   String? sid;
+  String? os;
 
   sharedPref() async {
     formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(date);
     s = formattedDate!.split(" ");
     final prefs = await SharedPreferences.getInstance();
     sid = prefs.getString('sid');
+    os = prefs.getString("os");
+
     userType = prefs.getString("userType");
     print("sid .sdd.....$sid");
 
@@ -159,75 +164,160 @@ class _MainDashboardState extends State<MainDashboard> {
                             ),
                           ],
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Todays Count",
-                                  style: GoogleFonts.oswald(
-                                      textStyle:
-                                          Theme.of(context).textTheme.displayLarge,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[700])),
-                              Text(" -  ${s[0]}",
-                                  style: GoogleFonts.oswald(
-                                      textStyle:
-                                          Theme.of(context).textTheme.bodyMedium,
-                                      fontSize: 16,
-                                      color: P_Settings.wavecolor))
-                            ],
-                          ),
-                        ),
-                        // SizedBox(height: size.height*01,),
-                        Row(
-                          children: [
-                            Padding(
+                          child: Card(
+                            elevation: 4,
+                            color: Color.fromARGB(255, 252, 252, 252),
+                            child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Orders",
-                                  "${value.orderCount != "null" ? value.orderCount : "0"}"),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Collection",
-                                  "${value.collectionCount != "null" ? value.collectionCount : "0"}"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Sales",
-                                  "${value.salesCount != "null" ? value.salesCount : "0"}"),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Return",
-                                  "${value.ret_count != "null" ? value.ret_count : "0"}"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(
-                                size,
-                                "Shops visited",
-                                "${value.shopVisited ?? "0"}",
+                              child: ListTile(
+                                leading: Image.asset(
+                                  "asset/sales.png",
+                                  height: size.height * 0.058,
+                                ),
+                                title: Text(
+                                  "SALES ENTRY",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OrderForm("", "sales")));
+                                },
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Shops Not Visited",
-                                  "${value.noshopVisited ?? "0"}"),
-                            ),
-                          ],
+                          ),
                         ),
-
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 4,
+                            color: Color.fromARGB(255, 252, 252, 252),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                leading: Image.asset(
+                                  "asset/customer.png",
+                                  height: size.height * 0.058,
+                                ),
+                                title: Text(
+                                  "CUSTOMER CREATION",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => CustomerCreation(
+                                          sid: sid!,
+                                          os: os,
+                                        ),
+                                      ));
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            color: Color.fromARGB(255, 252, 252, 252),
+                            elevation: 4,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                leading: Image.asset(
+                                  "asset/collector.png",
+                                  height: size.height * 0.058,
+                                ),
+                                title: Text(
+                                  "COLLECTION ENTRY",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OrderForm("", "collection")));
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(8.0),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Text("Todays Count",
+                        //           style: GoogleFonts.oswald(
+                        //               textStyle:
+                        //                   Theme.of(context).textTheme.displayLarge,
+                        //               fontSize: 20,
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Colors.grey[700])),
+                        //       Text(" -  ${s[0]}",
+                        //           style: GoogleFonts.oswald(
+                        //               textStyle:
+                        //                   Theme.of(context).textTheme.bodyMedium,
+                        //               fontSize: 16,
+                        //               color: P_Settings.wavecolor))
+                        //     ],
+                        //   ),
+                        // ),
+                        // SizedBox(height: size.height*01,),
+                        // Row(
+                        //   children: [
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: customcard(size, "Orders",
+                        //           "${value.orderCount != "null" ? value.orderCount : "0"}"),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: customcard(size, "Collection",
+                        //           "${value.collectionCount != "null" ? value.collectionCount : "0"}"),
+                        //     ),
+                        //   ],
+                        // ),
+                        // Row(
+                        //   children: [
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: customcard(size, "Sales",
+                        //           "${value.salesCount != "null" ? value.salesCount : "0"}"),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: customcard(size, "Return",
+                        //           "${value.ret_count != "null" ? value.ret_count : "0"}"),
+                        //     ),
+                        //   ],
+                        // ),
+                        // Row(
+                        //   children: [
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: customcard(
+                        //         size,
+                        //         "Shops visited",
+                        //         "${value.shopVisited ?? "0"}",
+                        //       ),
+                        //     ),
+                        //     Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: customcard(size, "Shops Not Visited",
+                        //           "${value.noshopVisited ?? "0"}"),
+                        //     ),
+                        //   ],
+                        // ),
+                        SizedBox(
+                          height: 12,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -256,30 +346,44 @@ class _MainDashboardState extends State<MainDashboard> {
                           ],
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Orders",
-                                  "\u{20B9}${value.ordrAmount == "null" ? "0.0" : value.ordrAmount}"),
+                              padding: const EdgeInsets.all(0),
+                              child: customcard(
+                                  size,
+                                  "Cash Sale",
+                                  // "${value.cs_cnt == null  ? "0" : value.cs_cnt}" +
+                                  //     "/" +
+                                      "\u{20B9}${value.cashSaleAmt == "null" ? "0.0" : value.cashSaleAmt}"),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Collection",
-                                  "\u{20B9}${value.collectionAmount == "null" ? "0.00" : value.collectionAmount}"),
+                              padding: const EdgeInsets.all(0),
+                              child: customcard(
+                                  size,
+                                  "Credit Sale",
+                                  // "${value.cr_cnt == null ? "0" : value.cr_cnt}" +
+                                  //     "/" +
+                                      "\u{20B9}${value.creditSaleAmt == "null" ? "0.00" : value.creditSaleAmt}"),
                             ),
                           ],
                         ),
                         Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Sales",
-                                  "\u{20B9}${value.salesAmount == "null" ? "0.0" : value.salesAmount}"),
+                              padding: const EdgeInsets.all(0),
+                              child: customcard(
+                                  size,
+                                  "Sales",
+                                  // "${value.salesCount == null ? "0" : value.salesCount}" +
+                                  //     "/" +
+                                      "\u{20B9}${value.salesAmount == "null" ? "0.0" : value.salesAmount}"),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: customcard(size, "Return",
-                                  "\u{20B9}${value.returnAmount == "null" ? "0.0" : value.returnAmount}"),
+                              padding: const EdgeInsets.all(0),
+                              child: customcard(size, "Collection",
+                                  "\u{20B9}${value.collectionAmount == "null" ? "0.00" : value.collectionAmount}"),
                             ),
                           ],
                         ),
@@ -349,7 +453,6 @@ class _MainDashboardState extends State<MainDashboard> {
                       ElevatedButton(
                           onPressed: () async {
                             if (selected != null) {
-                              
                               Provider.of<Controller>(context, listen: false)
                                   .areaId = selected;
                               Provider.of<Controller>(context, listen: false)
@@ -357,8 +460,7 @@ class _MainDashboardState extends State<MainDashboard> {
                               Provider.of<Controller>(context, listen: false)
                                   .dashboardSummery(
                                       sid!, s[0], selected!, context);
-                              String? genArea = Provider.of<Controller>(
-                                      context,
+                              String? genArea = Provider.of<Controller>(context,
                                       listen: false)
                                   .areaidFrompopup;
                               if (genArea != null) {
@@ -407,13 +509,13 @@ class _MainDashboardState extends State<MainDashboard> {
           side: const BorderSide(color: Colors.white70, width: 1),
           borderRadius: BorderRadius.circular(20),
         ),
-        color: title == "Orders"
+        color: title == "Cash Sale"
             ? P_Settings.dashbordcl1
             : title == "Collection"
                 ? P_Settings.dashbordcl2
                 : title == "Sales"
                     ? P_Settings.dashbordcl3
-                    : title == "Return"
+                    : title == "Credit Sale"
                         ? P_Settings.dashbordcl4
                         : title == "Shops visited"
                             ? P_Settings.dashbordcl5
@@ -421,13 +523,13 @@ class _MainDashboardState extends State<MainDashboard> {
                                 ? P_Settings.dashbordcl6
                                 : Colors.grey,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Column(
             children: [
               Container(
                 // height: size.height * 0.1,
                 // width: size.width * 0.12,
-                child: title == "Orders"
+                child: title == "Cash Sale"
                     ? Image.asset(
                         "asset/3.png",
                         height: size.height * 0.1,
@@ -457,7 +559,7 @@ class _MainDashboardState extends State<MainDashboard> {
                                         height: size.height * 0.1,
                                         width: size.width * 0.12,
                                       )
-                                    : title == "Return"
+                                    : title == "Credit Sale"
                                         ? Image.asset(
                                             "asset/7.png",
                                             height: size.height * 0.1,

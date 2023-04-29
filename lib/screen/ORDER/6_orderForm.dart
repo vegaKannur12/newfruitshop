@@ -151,6 +151,9 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
       onWillPop: () => _onBackPressed(context),
       child: Scaffold(
         // resizeToAvoidBottomInset: true,
+        appBar: AppBar(elevation: 0,backgroundColor:P_Settings.wavecolor,leading: IconButton(icon: Icon(Icons.arrow_back),onPressed: () {
+          Navigator.pop(context);
+        },),),
         body: InkWell(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());

@@ -220,9 +220,9 @@ class CommonPopup {
                                         //         SunmiScreen(),
                                         //   ),
                                         // );
-                                        Future.delayed(
-                                            const Duration(milliseconds: 500),
-                                            () {
+                                        // Future.delayed(
+                                        //     const Duration(milliseconds: 500),
+                                        //     () {
                                           Navigator.of(context).push(
                                             PageRouteBuilder(
                                                 opaque: false, // set to false
@@ -234,7 +234,7 @@ class CommonPopup {
                                                 // OrderForm(widget.areaname,"return"),
                                                 ),
                                           );
-                                        });
+                                        // });
                                       },
                                       child: Text("Yes"),
                                       style: ElevatedButton.styleFrom(

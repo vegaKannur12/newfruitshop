@@ -477,11 +477,20 @@ class _ReportPageState extends State<ReportPage> {
                                                               .length >
                                                           0
                                                   ? value.newreportList[index]
-                                                          ["bln"]
-                                                      .toString()
+                                                              ["bln"] ==
+                                                          null
+                                                      ? " 0"
+                                                      : value
+                                                          .newreportList[index]
+                                                              ["bln"]
+                                                          .toString()
                                                   : value.reportData[index]
-                                                          ["bln"]
-                                                      .toString(),
+                                                              ["bln"] ==
+                                                          null
+                                                      ? "0"
+                                                      : value.reportData[index]
+                                                              ["bln"]
+                                                          .toString(),
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.bold,

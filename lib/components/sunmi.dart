@@ -46,6 +46,12 @@ class Sunmi {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
   Future<void> printHeader(Map<String, dynamic> printSalesData) async {
+    String? billType;
+    if (printSalesData["master"]["payment_mode"] == "-2") {
+      billType = "CASH BILL";
+    } else if (printSalesData["master"]["payment_mode"] == "-3") {
+      billType = "CREDIT BILL";
+    }
     await SunmiPrinter.lineWrap(1); // creates one line space
     await SunmiPrinter.setAlignment(SunmiPrintAlign.CENTER);
 
@@ -55,7 +61,7 @@ class Sunmi {
           bold: true,
           // align: SunmiPrintAlign.CENTER,
         ));
-    await SunmiPrinter.printText(printSalesData["master"]["payment_mode"],
+    await SunmiPrinter.printText(billType.toString(),
         style: SunmiStyle(
           fontSize: SunmiFontSize.MD,
           bold: true,
@@ -251,18 +257,31 @@ class Sunmi {
   }
 
   Future<void> printTotal(Map<String, dynamic> printSalesData) async {
-    await SunmiPrinter.lineWrap(1); // creates one line space
+    // creates one line space
     await SunmiPrinter.setCustomFontSize(23);
     await SunmiPrinter.bold();
-
+    double tot =
+        printSalesData["master"]["ba"] + printSalesData["master"]["net_amt"];
     await SunmiPrinter.printRow(cols: [
       ColumnMaker(
-        text: "Grand Total :",
+        text: "Total ",
         width: 14,
         align: SunmiPrintAlign.LEFT,
       ),
       ColumnMaker(
         text: printSalesData["master"]["net_amt"].toStringAsFixed(2),
+        width: 16,
+        align: SunmiPrintAlign.RIGHT,
+      ),
+    ]);
+    await SunmiPrinter.printRow(cols: [
+      ColumnMaker(
+        text: "Balance",
+        width: 14,
+        align: SunmiPrintAlign.LEFT,
+      ),
+      ColumnMaker(
+        text: "${printSalesData["master"]["ba"].toStringAsFixed(2)}",
         width: 16,
         align: SunmiPrintAlign.RIGHT,
       ),
@@ -273,7 +292,24 @@ class Sunmi {
     //       bold: true,
     //       align: SunmiPrintAlign.CENTER,
     //     ));
-    await SunmiPrinter.lineWrap(1); // creates one line space
+
+    await SunmiPrinter.line();
+
+    await SunmiPrinter.bold();
+    await SunmiPrinter.setCustomFontSize(23);
+
+    await SunmiPrinter.printRow(cols: [
+      ColumnMaker(
+        text: "Grand Total",
+        width: 14,
+        align: SunmiPrintAlign.LEFT,
+      ),
+      ColumnMaker(
+        text: "${tot.toStringAsFixed(2)}",
+        width: 16,
+        align: SunmiPrintAlign.RIGHT,
+      ),
+    ]);
   }
 
   Future<void> details(Map<String, dynamic> printSalesData) async {
@@ -337,12 +373,11 @@ class Sunmi {
     await printRowAndColumns(printSalesData);
     await SunmiPrinter.line();
     await printTotal(printSalesData);
-    await SunmiPrinter.line();
+
     // await details(printSalesData);
 
     // await printQRCode("Dart is powerful");
     await SunmiPrinter.lineWrap(3);
-
     await SunmiPrinter.submitTransactionPrint();
     await SunmiPrinter.cut();
     await closePrinter();

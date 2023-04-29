@@ -46,7 +46,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   TabController? _tabController;
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Home '),
-    Tab(text: 'Todays Order'),
+    // Tab(text: 'Todays Order'),
     Tab(text: 'Todays Collection'),
     Tab(text: 'Todays Sale'),
     Tab(text: 'CList'),
@@ -335,14 +335,14 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           context: context,
         );
 
+      // case "1":
+      //   {
+      //     Provider.of<Controller>(context, listen: false).setDate(s[0], "");
+      //     Provider.of<Controller>(context, listen: false)
+      //         .todayOrder(s[0], gen_condition!);
+      //     return new TodaysOrder();
+      //   }
       case "1":
-        {
-          Provider.of<Controller>(context, listen: false).setDate(s[0], "");
-          Provider.of<Controller>(context, listen: false)
-              .todayOrder(s[0], gen_condition!);
-          return new TodaysOrder();
-        }
-      case "2":
         {
           Provider.of<Controller>(context, listen: false).setDate(s[0], "");
           Provider.of<Controller>(context, listen: false)
@@ -350,14 +350,14 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           return TodayCollection();
         }
 
-      case "3":
+      case "2":
         {
           Provider.of<Controller>(context, listen: false).setDate(s[0], "");
           Provider.of<Controller>(context, listen: false)
               .todaySales(s[0], gen_condition!);
           return new TodaySale();
         }
-      case "4":
+      case "3":
         {
           Provider.of<Controller>(context, listen: false)
               .selectReportFromOrder(context, sid!, s[0], "");
@@ -619,90 +619,90 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                             }),
                       ),
                       elevation: 0,
-                      // backgroundColor: P_Settings.wavecolor,    // actions: [
-                      //   /////////////////// table view in app bar /////////////////
-                      //   IconButton(
-                      //       onPressed: () {
-                      //         Provider.of<Controller>(context, listen: false)
-                      //             .clearList(Provider.of<Controller>(context,
-                      //                     listen: false)
-                      //                 .queryResult);
-                      //         Navigator.of(context).push(
-                      //           PageRouteBuilder(
-                      //               opaque: false, // set to false
-                      //               pageBuilder: (_, __, ___) =>
-                      //                   QueryResultScreen()),
-                      //         );
+                      // backgroundColor: P_Settings.wavecolor,
+                      //  actions: [
+                      //     /////////////////// table view in app bar /////////////////
+                      //     IconButton(
+                      //         onPressed: () {
+                      //           Provider.of<Controller>(context, listen: false)
+                      //               .clearList(Provider.of<Controller>(context,
+                      //                       listen: false)
+                      //                   .queryResult);
+                      //           Navigator.of(context).push(
+                      //             PageRouteBuilder(
+                      //                 opaque: false, // set to false
+                      //                 pageBuilder: (_, __, ___) =>
+                      //                     QueryResultScreen()),
+                      //           );
+                      //         },
+                      //         icon: Icon(
+                      //           Icons.query_builder,
+                      //           color: Colors.green,
+                      //         )),
+                      //     IconButton(
+                      //       onPressed: () async {
+                      //         await OrderAppDB.instance
+                      //             .deleteFromTableCommonQuery(
+                      //                 "returnMasterTable", "");
+                      //         await OrderAppDB.instance
+                      //             .deleteFromTableCommonQuery(
+                      //                 "returnDetailTable", "");
+                      //         await OrderAppDB.instance
+                      //             .deleteFromTableCommonQuery(
+                      //                 "returnBagTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("orderDetailTable", "");
+                      //         // await OrderAppDB.instance.deleteFromTableCommonQuery(
+                      //         //     "accountHeadsTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("customerTable", "");
+                      //         // await OrderAppDB.instance.deleteFromTableCommonQuery(
+                      //         //     "registrationTable", "");
+                      //         // await OrderAppDB.instance.deleteFromTableCommonQuery(
+                      //         //     "staffDetailsTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("areaDetailsTable", "");
+                      //         // await OrderAppDB.instance.deleteFromTableCommonQuery(
+                      //         //     "productDetailsTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("productsCategory", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("companyTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("orderBagTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("menuTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("settings", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("walletTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("collectionTable", "");
+                      //         // await OrderAppDB.instance
+                      //         //     .deleteFromTableCommonQuery("remarksTable", "");
+                      //         // await OrderAppDB.instance.deleteFromTableCommonQuery(
+                      //         //     "returnMasterTable", "");
+                      //         // await OrderAppDB.instance.deleteFromTableCommonQuery(
+                      //         //     "returnDetailTable", "");
                       //       },
                       //       icon: Icon(
-                      //         Icons.query_builder,
+                      //         Icons.delete,
                       //         color: Colors.green,
-                      //       )),
-                      //   IconButton(
-                      //     onPressed: () async {
-                      //       await OrderAppDB.instance
-                      //           .deleteFromTableCommonQuery(
-                      //               "returnMasterTable", "");
-                      //       await OrderAppDB.instance
-                      //           .deleteFromTableCommonQuery(
-                      //               "returnDetailTable", "");
-                      //       await OrderAppDB.instance
-                      //           .deleteFromTableCommonQuery(
-                      //               "returnBagTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("orderDetailTable", "");
-                      //       // await OrderAppDB.instance.deleteFromTableCommonQuery(
-                      //       //     "accountHeadsTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("customerTable", "");
-                      //       // await OrderAppDB.instance.deleteFromTableCommonQuery(
-                      //       //     "registrationTable", "");
-                      //       // await OrderAppDB.instance.deleteFromTableCommonQuery(
-                      //       //     "staffDetailsTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("areaDetailsTable", "");
-                      //       // await OrderAppDB.instance.deleteFromTableCommonQuery(
-                      //       //     "productDetailsTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("productsCategory", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("companyTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("orderBagTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("menuTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("settings", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("walletTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("collectionTable", "");
-                      //       // await OrderAppDB.instance
-                      //       //     .deleteFromTableCommonQuery("remarksTable", "");
-                      //       // await OrderAppDB.instance.deleteFromTableCommonQuery(
-                      //       //     "returnMasterTable", "");
-                      //       // await OrderAppDB.instance.deleteFromTableCommonQuery(
-                      //       //     "returnDetailTable", "");
-                      //     },
-                      //     icon: Icon(
-                      //       Icons.delete,
-                      //       color: Colors.green,
+                      //       ),
                       //     ),
-                      //   ),
-                      //   IconButton(
-                      //     onPressed: () async {
-                      //       List<Map<String, dynamic>> list =
-                      //           await OrderAppDB.instance.getListOfTables();
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(
-                      //             builder: (context) => TableList(list: list)),
-                      //       );
-                      //     },
-                      //     icon: Icon(Icons.table_bar, color: Colors.green),
-                      //   ),
-                      // ],
-                  
+                      //     IconButton(
+                      //       onPressed: () async {
+                      //         List<Map<String, dynamic>> list =
+                      //             await OrderAppDB.instance.getListOfTables();
+                      //         Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => TableList(list: list)),
+                      //         );
+                      //       },
+                      //       icon: Icon(Icons.table_bar, color: Colors.green),
+                      //     ),
+                      //   ],
                     ),
 
           drawer: Drawer(

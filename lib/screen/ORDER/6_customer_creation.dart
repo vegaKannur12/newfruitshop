@@ -74,6 +74,7 @@ class _CustomerCreationState extends State<CustomerCreation> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(),
       body: InkWell(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());

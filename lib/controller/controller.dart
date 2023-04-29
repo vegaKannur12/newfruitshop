@@ -191,11 +191,19 @@ class Controller extends ChangeNotifier {
   String returnAmount = "0.0";
   String ordrAmount = "0.0";
   String salesAmount = "0.0";
+  String cashSaleAmt = "0.0";
+  String creditSaleAmt = "0.0";
+
   String? remarkCount;
   String? orderCount;
   String? collectionCount;
   String? salesCount;
   String? ret_count;
+  String? cs_cnt;
+  String? cs_amt;
+  String? cr_cnt;
+  String? cr_amt;
+
   List<Map<String, dynamic>> remarkList = [];
   List<Map<String, dynamic>> remarkStaff = [];
   String? firstMenu;
@@ -2673,19 +2681,38 @@ class Controller extends ChangeNotifier {
 
     var res = await OrderAppDB.instance.dashboardSummery(sid, date, aid);
     var result = await OrderAppDB.instance.countCustomer(areaidFrompopup);
-    print("resultresult-- $aid");
+    print("resultresult-- $res");
     if (result.length > 0) {
       customerCount = result.length;
     }
 
     print("customerCount----$customerCount");
     orderCount = res[0]["ordCnt"].toString();
-    salesCount = res[0]["saleCnt"].toString();
-    collectionCount = res[0]["colCnt"].toString();
-    print("collectioncount...$collectionCount");
-    remarkCount = res[0]["rmCnt"].toString();
-    print("remarkCount...$remarkCount");
-    ret_count = res[0]["retCnt"].toString();
+    // salesCount = res[0]["saleCnt"];
+    // collectionCount = res[0]["colCnt"].toString();
+    // print("collectioncount...$collectionCount");
+    // remarkCount = res[0]["rmCnt"].toString();
+    // print("remarkCount...$remarkCount");
+    // ret_count = res[0]["retCnt"].toString();
+    // cs_cnt = res[0]["saleCntCS"];
+    cs_amt = res[0]["saleValCS"].toString();
+    // cr_cnt = res[0]["saleCntCR"];
+    cr_amt = res[0]["saleValCR"].toString();
+  //   if(cs_cnt==null){
+  //     cs_cnt="0";
+  //   }else{
+  //      cs_cnt = res[0]["saleCntCS"].toString();
+  //   }
+  //    if(cr_cnt==null){
+  //     cr_cnt="0";
+  //   }else{
+  //      cr_cnt = res[0]["saleCntCR"].toString();
+  //   }
+  //  if(salesCount==null){
+  //     salesCount="0";
+  //   }else{
+  //      salesCount = res[0]["saleCnt"].toString();
+  //   }
 
     print("jhfjsd-----${res[0]["colVal"]}--${res[0]["ordVal"]}");
     if (res[0]["colVal"] != null) {
@@ -2721,8 +2748,25 @@ class Controller extends ChangeNotifier {
       }
     }
     returnAmount = d4.toStringAsFixed(2);
-    shopVisited = res[0]["cusCount"];
+    if (res[0]["saleValCR"] != null) {
+      if (res[0]["saleValCR"] == 0) {
+        d4 = 0.0;
+      } else {
+        d4 = res[0]["saleValCR"];
+      }
+    }
+    creditSaleAmt = d4.toStringAsFixed(2);
+    if (res[0]["saleValCS"] != null) {
+      if (res[0]["saleValCS"] == 0) {
+        d4 = 0.0;
+      } else {
+        d4 = res[0]["saleValCS"];
+      }
+    }
+    cashSaleAmt = d4.toStringAsFixed(2);
 
+
+    shopVisited = res[0]["cusCount"];
     if (customerCount == null) {
       snackbar.showSnackbar(context, "Please download Customers", "");
     } else {
@@ -3469,11 +3513,11 @@ class Controller extends ChangeNotifier {
 
 //////////////////////////////////////////////////////////////////
   searchProcess_X001(String customerId, String os, String comid, String type,
-      List<Map<String, dynamic>> list1,String type1) async {
+      List<Map<String, dynamic>> list1, String type1) async {
     print("searchkey--comid-$type-$searchkey---$comid----$os---$list1");
     List<Map<String, dynamic>> result = [];
-    List<Map<String, dynamic>> list =
-        await OrderAppDB.instance.selectfromsalebagTable_X001(customerId,type1);
+    List<Map<String, dynamic>> list = await OrderAppDB.instance
+        .selectfromsalebagTable_X001(customerId, type1);
 
     //     await OrderAppDB.instance.selectfromOrderbagTable(customerId);
     newList.clear();
@@ -4059,13 +4103,10 @@ class Controller extends ChangeNotifier {
   }
 
   ////////////////////////////////////////////////////////////
-  fromSalesbagTable_X001(
-    String custmerId,String type
-  ) async {
+  fromSalesbagTable_X001(String custmerId, String type) async {
     print("dgsdgg---$type");
-    var res = await OrderAppDB.instance.selectfromsalebagTable_X001(
-      custmerId,type
-    );
+    var res =
+        await OrderAppDB.instance.selectfromsalebagTable_X001(custmerId, type);
     salesitemList2.clear();
     for (var item in res) {
       salesitemList2.add(item);
@@ -4083,13 +4124,10 @@ class Controller extends ChangeNotifier {
   }
 
 /////////////////////////////////////////////////
-  fromOrderbagTable_X001(
-    String custmerId,String type
-  ) async {
+  fromOrderbagTable_X001(String custmerId, String type) async {
     // salesitemList2.clear();
-    var res = await OrderAppDB.instance.selectfromsalebagTable_X001(
-      custmerId,type
-    );
+    var res =
+        await OrderAppDB.instance.selectfromsalebagTable_X001(custmerId, type);
 
     orderitemList2.clear();
     for (var item in res) {
