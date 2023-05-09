@@ -45,11 +45,12 @@ class Sunmi {
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-  Future<void> printHeader(Map<String, dynamic> printSalesData) async {
+  Future<void> printHeader(
+      Map<String, dynamic> printSalesData, String payment_mode) async {
     String? billType;
-    if (printSalesData["master"]["payment_mode"] == "-2") {
+    if (payment_mode == "-2") {
       billType = "CASH BILL";
-    } else if (printSalesData["master"]["payment_mode"] == "-3") {
+    } else if (payment_mode == "-3") {
       billType = "CREDIT BILL";
     }
     await SunmiPrinter.lineWrap(1); // creates one line space
@@ -61,7 +62,7 @@ class Sunmi {
           bold: true,
           // align: SunmiPrintAlign.CENTER,
         ));
-    await SunmiPrinter.printText(billType.toString(),
+    await SunmiPrinter.printText("jj",
         style: SunmiStyle(
           fontSize: SunmiFontSize.MD,
           bold: true,
@@ -312,6 +313,7 @@ class Sunmi {
     ]);
   }
 
+/////////////////////////////////////////////////////////////////////////////////////////
   Future<void> details(Map<String, dynamic> printSalesData) async {
     await SunmiPrinter.bold();
 
@@ -364,12 +366,13 @@ class Sunmi {
   }
 
   // print one structure
-  Future<void> printReceipt(Map<String, dynamic> printSalesData) async {
+  Future<void> printReceipt(
+      Map<String, dynamic> printSalesData, String payment_mode) async {
     print("value.printSalesData----${printSalesData}");
     await initialize();
     // await printLogoImage();
     // await printText("Flutter is awesome");
-    await printHeader(printSalesData);
+    await printHeader(printSalesData, payment_mode);
     await printRowAndColumns(printSalesData);
     await SunmiPrinter.line();
     await printTotal(printSalesData);

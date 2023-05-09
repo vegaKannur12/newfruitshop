@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:orderapp/components/commoncolor.dart';
 import 'package:orderapp/components/printingSale.dart';
 import 'package:orderapp/components/sunmi.dart';
@@ -29,6 +32,8 @@ class CommonPopup {
     String payment_mode,
     // double baserate,
   ) {
+    Timer? _timer;
+
     return AlertDialog(
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -211,30 +216,33 @@ class CommonPopup {
                                                 cid!, context, result[0]);
                                         Navigator.pop(context);
                                         Sunmi printer = Sunmi();
-                                        printer
-                                            .printReceipt(value.printSalesData);
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) =>
-                                        //         SunmiScreen(),
-                                        //   ),
-                                        // );
+                                        printer.printReceipt(
+                                          value.printSalesData,result[0]["payment_mode"]
+                                        );
+                                        // _timer?.cancel();
+                                        await EasyLoading.show(
+                                          status: 'printing...',
+                                          maskType: EasyLoadingMaskType.black,
+                                        );
                                         // Future.delayed(
-                                        //     const Duration(milliseconds: 500),
-                                        //     () {
+                                        //     const Duration(milliseconds: 500));
+                                        // await EasyLoading.dismiss();
+
+                                        Future.delayed(
+                                            const Duration(milliseconds: 500),
+                                            () {
                                           Navigator.of(context).push(
                                             PageRouteBuilder(
                                                 opaque: false, // set to false
                                                 pageBuilder: (_, __, ___) =>
                                                     Dashboard(
-                                                        type:
-                                                            "return from sales",
+                                                        type: "",
                                                         areaName: areaname)
                                                 // OrderForm(widget.areaname,"return"),
                                                 ),
                                           );
-                                        // });
+                                        });
+                                        await EasyLoading.dismiss();
                                       },
                                       child: Text("Yes"),
                                       style: ElevatedButton.styleFrom(
@@ -329,7 +337,7 @@ class CommonPopup {
                                 PageRouteBuilder(
                                     opaque: false, // set to false
                                     pageBuilder: (_, __, ___) => Dashboard(
-                                        type: "return from cartList",
+                                        type: " ",
                                         areaName: areaname)
                                     // OrderForm(widget.areaname,"return"),
                                     ),

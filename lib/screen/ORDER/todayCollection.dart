@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:orderapp/components/commoncolor.dart';
 import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/screen/ORDER/DateFinder.dart';
+import 'package:orderapp/screen/ORDER/pdfPrev.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -116,44 +117,104 @@ class _TodayCollectionState extends State<TodayCollection> {
             } else {
               return Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            dateFind.selectDateFind(
-                                context, "from date", "collection");
-                          },
-                          icon: Icon(
-                            Icons.calendar_month,
-                            color: P_Settings.wavecolor,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: Text(
-                          value.fromDate == null
-                              ? todaydate.toString()
-                              : value.fromDate.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[700],
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PdfPreviewPage(
+                                    type: 'collection',
+                                  ),
+                                ),
+                              );
+                              // SaleReport printer = SaleReport();
+                              // printer.printSaleReport(value.todaySalesList);
+                            },
+                            child: Text(
+                              "Print Report",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.red),
+                            )),
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  dateFind.selectDateFind(
+                                      context, "from date", "collection");
+                                },
+                                icon: Icon(
+                                  Icons.calendar_month,
+                                  color: P_Settings.wavecolor,
+                                )),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: Text(
+                                value.fromDate == null
+                                    ? todaydate.toString()
+                                    : value.fromDate.toString(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      // IconButton(
-                      //     onPressed: () {
-                      //       dateFind.selectDateFind(context, "to date");
-                      //     },
-                      //     icon: Icon(Icons.calendar_month)),
-                      // Text(dateFind.toDate.toString()),
-                    ],
+
+                        // IconButton(
+                        //     onPressed: () {
+                        //       dateFind.selectDateFind(context, "to date");
+                        //     },
+                        //     icon: Icon(Icons.calendar_month)),
+                        // Text(dateFind.toDate.toString()),
+                      ],
+                    ),
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     IconButton(
+                  //         onPressed: () {
+                  //           dateFind.selectDateFind(
+                  //               context, "from date", "collection");
+                  //         },
+                  //         icon: Icon(
+                  //           Icons.calendar_month,
+                  //           color: P_Settings.wavecolor,
+                  //         )),
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(right: 10.0),
+                  //       child: Text(
+                  //         value.fromDate == null
+                  //             ? todaydate.toString()
+                  //             : value.fromDate.toString(),
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Colors.grey[700],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     // IconButton(
+                  //     //     onPressed: () {
+                  //     //       dateFind.selectDateFind(context, "to date");
+                  //     //     },
+                  //     //     icon: Icon(Icons.calendar_month)),
+                  //     // Text(dateFind.toDate.toString()),
+                  //   ],
+                  // ),
                   Expanded(
                     child: ListView.builder(
                       itemCount: value.todayCollectionList.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(2),
                           child: Card(
                             color: Colors.grey[100],
                             child: ListTile(

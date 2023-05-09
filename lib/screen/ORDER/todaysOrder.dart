@@ -5,9 +5,11 @@ import 'package:orderapp/components/commoncolor.dart';
 import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/screen/ORDER/5_mainDashboard.dart';
 import 'package:orderapp/screen/ORDER/DateFinder.dart';
+import 'package:orderapp/screen/ORDER/pdfPrev.dart';
 import 'package:orderapp/screen/historydataPopup.dart';
 import 'package:provider/provider.dart';
 
+import '../../db_helper.dart';
 import '5_mainDashboard.dart';
 import 'orderDetailsToday.dart';
 
@@ -111,44 +113,107 @@ class _TodaysOrderState extends State<TodaysOrder> {
             } else {
               return Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            dateFind.selectDateFind(
-                                context, "from date", "sale order");
-                          },
-                          icon: Icon(
-                            Icons.calendar_month,
-                            color: P_Settings.wavecolor,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: Text(
-                          value.fromDate == null
-                              ? todaydate.toString()
-                              : value.fromDate.toString(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[700],
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                            onPressed: () async {
+                              String d = value.fromDate.toString();
+                              print("detailodata----${d}");
+                              var detailData = await OrderAppDB.instance
+                                  .printOrderDetailTable(
+                                d
+                              );
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PdfPreviewPage(
+                                    type: 'sale order',
+                                    list: detailData,
+                                  ),
+                                ),
+                              );
+                              // SaleReport printer = SaleReport();
+                              // printer.printSaleReport(value.todaySalesList);
+                            },
+                            child: Text(
+                              "Print Report",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: Colors.red),
+                            )),
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  dateFind.selectDateFind(
+                                      context, "from date", "sale order");
+                                },
+                                icon: Icon(
+                                  Icons.calendar_month,
+                                  color: P_Settings.wavecolor,
+                                )),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10.0),
+                              child: Text(
+                                value.fromDate == null
+                                    ? todaydate.toString()
+                                    : value.fromDate.toString(),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      // IconButton(
-                      //     onPressed: () {
-                      //       dateFind.selectDateFind(context, "to date");
-                      //     },
-                      //     icon: Icon(Icons.calendar_month)),
-                      // Text(dateFind.toDate.toString()),
-                    ],
+
+                        // IconButton(
+                        //     onPressed: () {
+                        //       dateFind.selectDateFind(context, "to date");
+                        //     },
+                        //     icon: Icon(Icons.calendar_month)),
+                        // Text(dateFind.toDate.toString()),
+                      ],
+                    ),
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     IconButton(
+                  //         onPressed: () {
+                  //           dateFind.selectDateFind(
+                  //               context, "from date", "sale order");
+                  //         },
+                  //         icon: Icon(
+                  //           Icons.calendar_month,
+                  //           color: P_Settings.wavecolor,
+                  //         )),
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(right: 10.0),
+                  //       child: Text(
+                  //         value.fromDate == null
+                  //             ? todaydate.toString()
+                  //             : value.fromDate.toString(),
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Colors.grey[700],
+                  //         ),
+                  //       ),
+                  //     ),
+
+                  //   ],
+                  // ),
                   Expanded(
                     child: ListView.builder(
                       itemCount: value.todayOrderList.length,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(2.0),
                           child: Column(
                             children: [
                               GestureDetector(
@@ -183,7 +248,7 @@ class _TodaysOrderState extends State<TodaysOrder> {
                                             child: Text(
                                                 value.todayOrderList[index]
                                                     ["Order_Num"],
-                                                 style: TextStyle(
+                                                style: TextStyle(
                                                     color: Colors.grey[700],
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 17)),

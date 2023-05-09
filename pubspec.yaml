@@ -61,6 +61,10 @@ dependencies:
   esc_pos_utils_plus: ^2.0.1+6
   blinking_text: ^1.0.2
   sunmi_printer_plus: ^2.1.1
+  flutter_easyloading: ^3.0.5
+  pdf: ^3.8.3
+  printing: ^5.9.3
+
 
   
  

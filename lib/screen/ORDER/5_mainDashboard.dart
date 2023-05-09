@@ -165,10 +165,50 @@ class _MainDashboardState extends State<MainDashboard> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                              top: 4.0, left: 8, right: 8),
                           child: Card(
                             elevation: 4,
-                            color: Color.fromARGB(255, 252, 252, 252),
+                            color: Color.fromARGB(255, 240, 237, 237),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                leading: Image.asset(
+                                  "asset/order.png",
+                                  height: size.height * 0.058,
+                                ),
+                                title: Text(
+                                  "SALE ORDER",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
+                                ),
+                                onTap: () {
+                                  // if (widget.type == "return from cartList") {
+                                  //   return OrderForm(
+                                  //       widget.areaName!, "sale order");
+                                  // } else if (widget.type ==
+                                  //     "Product return confirmed") {
+                                  //   return OrderForm(widget.areaName!, "");
+                                  // } else {
+                                  //   return OrderForm("", "");
+                                  // }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OrderForm("", "sale order")));
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 4.0, left: 8, right: 8),
+                          child: Card(
+                            elevation: 4,
+                            color: Color.fromARGB(255, 240, 237, 237),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ListTile(
@@ -178,7 +218,9 @@ class _MainDashboardState extends State<MainDashboard> {
                                 ),
                                 title: Text(
                                   "SALES ENTRY",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
                                 ),
                                 onTap: () {
                                   Navigator.push(
@@ -192,10 +234,11 @@ class _MainDashboardState extends State<MainDashboard> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                              top: 4.0, left: 8, right: 8),
                           child: Card(
                             elevation: 4,
-                            color: Color.fromARGB(255, 252, 252, 252),
+                            color: Color.fromARGB(255, 240, 237, 237),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ListTile(
@@ -205,7 +248,9 @@ class _MainDashboardState extends State<MainDashboard> {
                                 ),
                                 title: Text(
                                   "CUSTOMER CREATION",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
                                 ),
                                 onTap: () {
                                   Navigator.push(
@@ -222,9 +267,10 @@ class _MainDashboardState extends State<MainDashboard> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                              top: 4.0, left: 8, right: 8),
                           child: Card(
-                            color: Color.fromARGB(255, 252, 252, 252),
+                            color: Color.fromARGB(255, 240, 237, 237),
                             elevation: 4,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -235,7 +281,9 @@ class _MainDashboardState extends State<MainDashboard> {
                                 ),
                                 title: Text(
                                   "COLLECTION ENTRY",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
                                 ),
                                 onTap: () {
                                   Navigator.push(
@@ -353,8 +401,8 @@ class _MainDashboardState extends State<MainDashboard> {
                               child: customcard(
                                   size,
                                   "Cash Sale",
-                                  // "${value.cs_cnt == null  ? "0" : value.cs_cnt}" +
-                                  //     "/" +
+                                  "${value.cs_cnt == null ? "0" : value.cs_cnt}" +
+                                      "/" +
                                       "\u{20B9}${value.cashSaleAmt == "null" ? "0.0" : value.cashSaleAmt}"),
                             ),
                             Padding(
@@ -362,22 +410,22 @@ class _MainDashboardState extends State<MainDashboard> {
                               child: customcard(
                                   size,
                                   "Credit Sale",
-                                  // "${value.cr_cnt == null ? "0" : value.cr_cnt}" +
-                                  //     "/" +
+                                  "${value.cr_cnt == null ? "0" : value.cr_cnt}" +
+                                      "/" +
                                       "\u{20B9}${value.creditSaleAmt == "null" ? "0.00" : value.creditSaleAmt}"),
                             ),
                           ],
                         ),
                         Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(0),
                               child: customcard(
                                   size,
                                   "Sales",
-                                  // "${value.salesCount == null ? "0" : value.salesCount}" +
-                                  //     "/" +
+                                  "${value.salesCount == null ? "0" : value.salesCount}" +
+                                      "/" +
                                       "\u{20B9}${value.salesAmount == "null" ? "0.0" : value.salesAmount}"),
                             ),
                             Padding(
@@ -509,6 +557,7 @@ class _MainDashboardState extends State<MainDashboard> {
           side: const BorderSide(color: Colors.white70, width: 1),
           borderRadius: BorderRadius.circular(20),
         ),
+        // color: Colors.black,
         color: title == "Cash Sale"
             ? P_Settings.dashbordcl1
             : title == "Collection"
@@ -531,19 +580,19 @@ class _MainDashboardState extends State<MainDashboard> {
                 // width: size.width * 0.12,
                 child: title == "Cash Sale"
                     ? Image.asset(
-                        "asset/3.png",
+                        "asset/cashsale.png",
                         height: size.height * 0.1,
                         width: size.width * 0.12,
                       )
                     : title == "Collection"
                         ? Image.asset(
-                            "asset/4.png",
+                            "asset/collection.png",
                             height: size.height * 0.1,
                             width: size.width * 0.12,
                           )
                         : title == "Sales"
                             ? Image.asset(
-                                "asset/2.png",
+                                "asset/sale.png",
                                 height: size.height * 0.1,
                                 width: size.width * 0.12,
                               )
@@ -561,7 +610,7 @@ class _MainDashboardState extends State<MainDashboard> {
                                       )
                                     : title == "Credit Sale"
                                         ? Image.asset(
-                                            "asset/7.png",
+                                            "asset/creditSale.png",
                                             height: size.height * 0.1,
                                             width: size.width * 0.12,
                                           )

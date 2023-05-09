@@ -105,9 +105,10 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
     print(
         "seelected area-----${Provider.of<Controller>(context, listen: false).areaidFrompopup}");
     print(
-        "_selectedAreaId----${Provider.of<Controller>(context, listen: false).selectedAreaId}");
+        "_selectedAreaId----${Provider.of<Controller>(context, listen: false).areaId}");
 
     if (Provider.of<Controller>(context, listen: false).areaId != null) {
+      print("from init stte-----");
       Provider.of<Controller>(context, listen: false)
           .getCustomer(Provider.of<Controller>(context, listen: false).areaId);
     }
@@ -151,9 +152,16 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
       onWillPop: () => _onBackPressed(context),
       child: Scaffold(
         // resizeToAvoidBottomInset: true,
-        appBar: AppBar(elevation: 0,backgroundColor:P_Settings.wavecolor,leading: IconButton(icon: Icon(Icons.arrow_back),onPressed: () {
-          Navigator.pop(context);
-        },),),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: P_Settings.wavecolor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
         body: InkWell(
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
@@ -231,10 +239,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                           text: values.areaSelecton == null ||
                                                   values.areaSelecton!.isEmpty
                                               ? widget.areaname
-                                              : values.areaSelecton
-                                                  .toString()),
-                                      optionsBuilder:
-                                          (TextEditingValue value) {
+                                              : values.areaSelecton.toString()),
+                                      optionsBuilder: (TextEditingValue value) {
                                         if (widget.areaname != "") {
                                           FocusScope.of(context).unfocus();
 
@@ -263,9 +269,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                           print("areaName...$areaName");
                                           _selectedAreaId = value["aid"];
                                           Provider.of<Controller>(context,
-                                                      listen: false)
-                                                  .selectedAreaId =
-                                              _selectedAreaId;
+                                                  listen: false)
+                                              .selectedAreaId = _selectedAreaId;
                                           Provider.of<Controller>(context,
                                                   listen: false)
                                               .areaAutoComplete = [
@@ -278,9 +283,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                           print(
                                               "${Provider.of<Controller>(context, listen: false).areaAutoComplete}");
                                           Provider.of<Controller>(context,
-                                                      listen: false)
-                                                  .areaSelecton =
-                                              _selectedItemarea;
+                                                  listen: false)
+                                              .areaSelecton = _selectedItemarea;
                                           Provider.of<Controller>(context,
                                                   listen: false)
                                               .areaId = _selectedAreaId;
@@ -318,11 +322,11 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                 onPressed: () {
                                                   fieldText.clear();
                                                   _selectedAreaId = ' ';
-                                                    Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .getCustomer(
-                                                                _selectedAreaId);
+                                                  Provider.of<Controller>(
+                                                          context,
+                                                          listen: false)
+                                                      .getCustomer(
+                                                          _selectedAreaId);
                                                 },
                                                 icon: const Icon(Icons.clear),
                                               ),
@@ -346,13 +350,12 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                           ),
                                         );
                                       },
-                                      optionsViewBuilder:
-                                          (BuildContext context,
-                                              AutocompleteOnSelected<
-                                                      Map<String, dynamic>>
-                                                  onSelected,
-                                              Iterable<Map<String, dynamic>>
-                                                  options) {
+                                      optionsViewBuilder: (BuildContext context,
+                                          AutocompleteOnSelected<
+                                                  Map<String, dynamic>>
+                                              onSelected,
+                                          Iterable<Map<String, dynamic>>
+                                              options) {
                                         return Align(
                                           alignment: Alignment.topLeft,
                                           child: Material(
@@ -361,19 +364,18 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                               width: size.width * 0.84,
                                               child: ListView.builder(
                                                 shrinkWrap: true,
-                                                padding: const EdgeInsets.all(2.0),
+                                                padding:
+                                                    const EdgeInsets.all(2.0),
                                                 itemCount: options.length,
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {
                                                   final Map<String, dynamic>
-                                                      option = options
-                                                          .elementAt(index);
-                                                  print(
-                                                      "option----$option");
+                                                      option =
+                                                      options.elementAt(index);
+                                                  print("option----$option");
                                                   return SizedBox(
-                                                    height:
-                                                        size.height * 0.05,
+                                                    height: size.height * 0.05,
                                                     child: ListTile(
                                                       // tileColor: Colors.amber,
                                                       onTap: () {
@@ -390,10 +392,11 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                       title: Text(
                                                           option["aname"]
                                                               .toString(),
-                                                          style: const TextStyle(
-                                                              fontSize: 15,
-                                                              color: Colors
-                                                                  .black)),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 15,
+                                                                  color: Colors
+                                                                      .black)),
                                                     ),
                                                   );
                                                 },
@@ -423,8 +426,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                     children: [
                                       Container(
                                         // height: size.height * 0.06,
-                                        child: Autocomplete<
-                                            Map<String, dynamic>>(
+                                        child:
+                                            Autocomplete<Map<String, dynamic>>(
                                           // initialValue: TextEditingValue(
                                           //     text: values.boolCustomerSet
                                           //         ? values.customer_Name
@@ -450,8 +453,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                   .where((suggestion) =>
                                                       suggestion["hname"]
                                                           .toLowerCase()
-                                                          .startsWith(value
-                                                              .text
+                                                          .startsWith(value.text
                                                               .toLowerCase()));
 
                                               // contains(value.text
@@ -461,15 +463,13 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
 
                                           displayStringForOption:
                                               (Map<String, dynamic> option) =>
-                                                  option["hname"]
-                                                      .toUpperCase(),
+                                                  option["hname"].toUpperCase(),
                                           onSelected: (value) {
                                             setState(() {
                                               print("value----$value");
-                                              _selectedItemcus =
-                                                  value["hname"];
-                                              customerName = value["hname"]
-                                                  .toUpperCase();
+                                              _selectedItemcus = value["hname"];
+                                              customerName =
+                                                  value["hname"].toUpperCase();
                                               custmerId = value["ac_code"];
                                               print(
                                                   "Code .........---$custmerId");
@@ -497,7 +497,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             20),
-                                                    borderSide: const BorderSide(
+                                                    borderSide:
+                                                        const BorderSide(
                                                       color: Colors.black,
                                                       width: 3,
                                                     ),
@@ -509,14 +510,34 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                     onPressed: () {
                                                       print(
                                                           "szfjzjfnjd------$_selectedAreaId");
-                                                      if (_selectedAreaId ==
-                                                          null) {
-                                                        print("yes correct");
-                                                        Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .getCustomer(
-                                                                _selectedAreaId);
+                                                      if (values.custmerDetails
+                                                              .length ==
+                                                          0) {
+                                                        if (Provider.of<Controller>(
+                                                                    context,
+                                                                    listen:
+                                                                        false)
+                                                                .areaId ==
+                                                            null) {
+                                                          print("yes correct");
+                                                          Provider.of<Controller>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .getCustomer(
+                                                                  _selectedAreaId);
+                                                        } else {
+                                                          print(
+                                                              "else---${Provider.of<Controller>(context, listen: false).areaId}");
+                                                          Provider.of<Controller>(
+                                                                  context,
+                                                                  listen: false)
+                                                              .getCustomer(Provider.of<
+                                                                          Controller>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                                  .areaId);
+                                                        }
                                                       }
 
                                                       print(
@@ -529,7 +550,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                             context) {
                                                           return Container(
                                                             height: values
-                                                                        .custmerDetails.isNotEmpty
+                                                                    .custmerDetails
+                                                                    .isNotEmpty
                                                                 ? MediaQuery.of(
                                                                             context)
                                                                         .size
@@ -537,8 +559,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                     0.5
                                                                 : size.height *
                                                                     0.2,
-                                                            color:
-                                                                Colors.white,
+                                                            color: Colors.white,
                                                             child: Center(
                                                               child: Column(
                                                                 mainAxisAlignment:
@@ -549,7 +570,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                         .min,
                                                                 children: <
                                                                     Widget>[
-                                                                  values.custmerDetails.isNotEmpty
+                                                                  values.custmerDetails
+                                                                          .isNotEmpty
                                                                       ? Row(
                                                                           mainAxisAlignment:
                                                                               MainAxisAlignment.end,
@@ -562,21 +584,25 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                           ],
                                                                         )
                                                                       : Container(),
-                                                                  values.custmerDetails.isNotEmpty &&
+                                                                  values.custmerDetails
+                                                                              .isNotEmpty &&
                                                                           values
-                                                                              .custmerDetails.isNotEmpty
+                                                                              .custmerDetails
+                                                                              .isNotEmpty
                                                                       ? const Padding(
                                                                           padding:
                                                                               EdgeInsets.only(top: 8.0),
                                                                           child:
                                                                               Text(
                                                                             'Customers',
-                                                                            style: TextStyle(fontSize: 20),
+                                                                            style:
+                                                                                TextStyle(fontSize: 20),
                                                                           ),
                                                                         )
                                                                       : const Text(
                                                                           ''),
-                                                                  values.custmerDetails.isNotEmpty
+                                                                  values.custmerDetails
+                                                                          .isNotEmpty
                                                                       ? const Divider(
                                                                           indent:
                                                                               50,
@@ -587,7 +613,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                         )
                                                                       : const Text(
                                                                           ""),
-                                                                  values.custmerDetails.isNotEmpty
+                                                                  values.custmerDetails
+                                                                          .isNotEmpty
                                                                       ? Expanded(
                                                                           child: Padding(
                                                                               padding: const EdgeInsets.only(left: 10, top: 20),
@@ -631,8 +658,9 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                         )
                                                                       : Text(
                                                                           "No Data Found!!!",
-                                                                          style:
-                                                                              TextStyle(fontSize: 17, color: P_Settings.extracolor),
+                                                                          style: TextStyle(
+                                                                              fontSize: 17,
+                                                                              color: P_Settings.extracolor),
                                                                         ),
                                                                 ],
                                                               ),
@@ -669,11 +697,9 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                     customertext.text != null
                                                         ? customertext
                                                         : fieldText,
-                                                scrollPadding:
-                                                    EdgeInsets.only(
-                                                        bottom: topInsets +
-                                                            size.height *
-                                                                0.34),
+                                                scrollPadding: EdgeInsets.only(
+                                                    bottom: topInsets +
+                                                        size.height * 0.34),
                                                 focusNode: fieldFocusNode,
                                                 style: TextStyle(
                                                     fontSize: 13,
@@ -683,15 +709,14 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                               ),
                                             );
                                           },
-                                          optionsMaxHeight:
-                                              size.height * 0.02,
-                                          optionsViewBuilder: (BuildContext
-                                                  context,
-                                              AutocompleteOnSelected<
-                                                      Map<String, dynamic>>
-                                                  onSelected,
-                                              Iterable<Map<String, dynamic>>
-                                                  options) {
+                                          optionsMaxHeight: size.height * 0.02,
+                                          optionsViewBuilder:
+                                              (BuildContext context,
+                                                  AutocompleteOnSelected<
+                                                          Map<String, dynamic>>
+                                                      onSelected,
+                                                  Iterable<Map<String, dynamic>>
+                                                      options) {
                                             return Align(
                                               alignment: Alignment.topLeft,
                                               child: Material(
@@ -700,31 +725,28 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                   height: size.height * 0.2,
                                                   child: ListView.builder(
                                                     padding:
-                                                        const EdgeInsets.all(10.0),
+                                                        const EdgeInsets.all(
+                                                            10.0),
                                                     itemCount: options.length,
                                                     itemBuilder:
                                                         (BuildContext context,
                                                             int index) {
                                                       //      print(
                                                       // "option----${options}");
-                                                      print(
-                                                          "index----$index");
-                                                      final Map<String,
-                                                              dynamic>
-                                                          option =
-                                                          options.elementAt(
-                                                              index);
+                                                      print("index----$index");
+                                                      final Map<String, dynamic>
+                                                          option = options
+                                                              .elementAt(index);
                                                       print(
                                                           "option----$option");
                                                       return SizedBox(
-                                                        height: size.height *
-                                                            0.05,
+                                                        height:
+                                                            size.height * 0.05,
                                                         child: ListTile(
                                                           onTap: () async {
                                                             print(
                                                                 "optonsssssssssssss$option");
-                                                            onSelected(
-                                                                option);
+                                                            onSelected(option);
                                                             final prefs =
                                                                 await SharedPreferences
                                                                     .getInstance();
@@ -743,8 +765,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                               option["hname"]
                                                                   .toString(),
                                                               style: const TextStyle(
-                                                                  fontSize:
-                                                                      15,
+                                                                  fontSize: 15,
                                                                   color: Colors
                                                                       .black)),
                                                         ),
@@ -792,12 +813,10 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
 
                                                       if (!currentFocus
                                                           .hasPrimaryFocus) {
-                                                        currentFocus
-                                                            .unfocus();
+                                                        currentFocus.unfocus();
                                                       }
 
-                                                      if (_formKey
-                                                          .currentState!
+                                                      if (_formKey.currentState!
                                                           .validate()) {
                                                         Provider.of<Controller>(
                                                                 context,
@@ -807,15 +826,15 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                     .toString(),
                                                                 "orderform");
 
-                                                        String os = "R" "${values.ordernum[0]["os"]}";
+                                                        String os = "R"
+                                                            "${values.ordernum[0]["os"]}";
                                                         Provider.of<Controller>(
                                                                 context,
                                                                 listen: false)
                                                             .countFromTable(
                                                           "returnBagTable",
                                                           os,
-                                                          custmerId
-                                                              .toString(),
+                                                          custmerId.toString(),
                                                         );
                                                         Provider.of<Controller>(
                                                                 context,
@@ -827,18 +846,18 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                 listen: false)
                                                             .count = "0";
                                                         Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .returnfilterCompany = false;
+                                                                    context,
+                                                                    listen: false)
+                                                                .returnfilterCompany =
+                                                            false;
                                                         Navigator.of(context)
                                                             .push(
                                                           PageRouteBuilder(
                                                             opaque:
                                                                 false, // set to false
-                                                            pageBuilder: (_,
-                                                                    __,
-                                                                    ___) =>
-                                                                ReturnItem(
+                                                            pageBuilder:
+                                                                (_, __, ___) =>
+                                                                    ReturnItem(
                                                               customerId:
                                                                   custmerId
                                                                       .toString(),
@@ -847,10 +866,14 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                       values
                                                                           .areaidFrompopup!
                                                                           .isEmpty
-                                                                  ? Provider.of<Controller>(context, listen: false)
+                                                                  ? Provider.of<Controller>(
+                                                                              context,
+                                                                              listen:
+                                                                                  false)
                                                                           .areaAutoComplete[
                                                                       0]
-                                                                  : Provider.of<Controller>(
+                                                                  : Provider.of<
+                                                                              Controller>(
                                                                           context,
                                                                           listen:
                                                                               false)
@@ -861,10 +884,14 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                       values
                                                                           .areaidFrompopup!
                                                                           .isEmpty
-                                                                  ? Provider.of<Controller>(context, listen: false)
+                                                                  ? Provider.of<Controller>(
+                                                                              context,
+                                                                              listen:
+                                                                                  false)
                                                                           .areaAutoComplete[
                                                                       1]
-                                                                  : Provider.of<Controller>(
+                                                                  : Provider.of<
+                                                                              Controller>(
                                                                           context,
                                                                           listen:
                                                                               false)
@@ -877,14 +904,14 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                     },
                                                     style: ElevatedButton
                                                         .styleFrom(
-                                                      backgroundColor: P_Settings
-                                                          .returnbuttnColor,
+                                                      backgroundColor:
+                                                          P_Settings
+                                                              .returnbuttnColor,
                                                       shape:
                                                           RoundedRectangleBorder(
                                                         borderRadius:
                                                             BorderRadius
-                                                                    .circular(
-                                                                10.0),
+                                                                .circular(10.0),
                                                       ),
                                                     ),
                                                   ),
@@ -897,12 +924,10 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                           : widget.type == "collection"
                                               ? Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .center,
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     SizedBox(
-                                                      width:
-                                                          size.width * 0.27,
+                                                      width: size.width * 0.27,
                                                       height:
                                                           size.height * 0.05,
                                                       child:
@@ -949,7 +974,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                         .toString(),
                                                                     aid: Provider.of<Controller>(
                                                                             context,
-                                                                            listen: false)
+                                                                            listen:
+                                                                                false)
                                                                         .areaId),
                                                               ),
                                                             );
@@ -966,8 +992,9 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                         ),
                                                         style: ElevatedButton
                                                             .styleFrom(
-                                                          backgroundColor: P_Settings
-                                                              .collectionbuttnColor,
+                                                          backgroundColor:
+                                                              P_Settings
+                                                                  .collectionbuttnColor,
                                                           shape:
                                                               RoundedRectangleBorder(
                                                             borderRadius:
@@ -979,8 +1006,7 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                       ),
                                                     ),
                                                     SizedBox(
-                                                      width:
-                                                          size.width * 0.05,
+                                                      width: size.width * 0.05,
                                                     ),
                                                   ],
                                                 )
@@ -991,34 +1017,33 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                               .center,
                                                       children: [
                                                         SizedBox(
-                                                          width: size.width *
-                                                              0.3,
-                                                          child:
-                                                              ElevatedButton
-                                                                  .icon(
+                                                          width:
+                                                              size.width * 0.3,
+                                                          child: ElevatedButton
+                                                              .icon(
                                                             icon: const Icon(
                                                               Icons.sell,
-                                                              color: Colors
-                                                                  .white,
+                                                              color:
+                                                                  Colors.white,
                                                               size: 15.0,
                                                             ),
                                                             label: const Text(
                                                               "Sales",
                                                               style: TextStyle(
-                                                                  fontSize:
-                                                                      12),
+                                                                  fontSize: 12),
                                                             ),
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
-                                                              backgroundColor: P_Settings
-                                                                  .wavecolor,
+                                                              backgroundColor:
+                                                                  P_Settings
+                                                                      .wavecolor,
                                                               shape:
                                                                   RoundedRectangleBorder(
                                                                 borderRadius:
                                                                     BorderRadius
-                                                                            .circular(
-                                                                        10.0),
+                                                                        .circular(
+                                                                            10.0),
                                                               ),
                                                             ),
                                                             onPressed:
@@ -1037,14 +1062,17 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                               if (_formKey
                                                                   .currentState!
                                                                   .validate()) {
-                                                                List customerDet = await OrderAppDB
-                                                                    .instance
-                                                                    .selectAllcommon(
-                                                                        'accountHeadsTable',
-                                                                        "ac_code='$custmerId'");
+                                                                List
+                                                                    customerDet =
+                                                                    await OrderAppDB
+                                                                        .instance
+                                                                        .selectAllcommon(
+                                                                            'accountHeadsTable',
+                                                                            "ac_code='$custmerId'");
                                                                 print(
                                                                     "customerDet------$customerDet");
-                                                                String os = "S" "${values.ordernum[0]["os"]}";
+                                                                String os = "S"
+                                                                    "${values.ordernum[0]["os"]}";
 
                                                                 Provider.of<Controller>(
                                                                         context,
@@ -1062,7 +1090,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                             false)
                                                                     .fromSalesbagTable_X001(
                                                                         custmerId
-                                                                            .toString(),"sales");
+                                                                            .toString(),
+                                                                        "sales");
                                                                 Provider.of<Controller>(
                                                                         context,
                                                                         listen:
@@ -1089,19 +1118,22 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                     opaque:
                                                                         false, // set to false
                                                                     pageBuilder: (_, __, ___) => SalesItem(
-                                                                        customerId: custmerId
-                                                                            .toString(),
+                                                                        customerId:
+                                                                            custmerId
+                                                                                .toString(),
                                                                         areaId: values.areaidFrompopup == null || values.areaidFrompopup!.isEmpty
                                                                             ? Provider.of<Controller>(context, listen: false).areaAutoComplete[
                                                                                 0]
                                                                             : Provider.of<Controller>(context, listen: false)
                                                                                 .areaidFrompopup!,
-                                                                        os:
-                                                                            os,
+                                                                        os: os,
                                                                         areaName: values.areaidFrompopup == null || values.areaidFrompopup!.isEmpty
-                                                                            ? Provider.of<Controller>(context, listen: false).areaAutoComplete[1]
-                                                                            : Provider.of<Controller>(context, listen: false).areaSelecton!,
-                                                                        type: "sale",
+                                                                            ? Provider.of<Controller>(context, listen: false).areaAutoComplete[
+                                                                                1]
+                                                                            : Provider.of<Controller>(context, listen: false)
+                                                                                .areaSelecton!,
+                                                                        type:
+                                                                            "sale",
                                                                         gtype: customerDet[0]["gtype"]),
                                                                   ),
                                                                 );
@@ -1114,174 +1146,13 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                   : Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .spaceEvenly,
+                                                              .center,
                                                       children: [
-                                                        ElevatedButton.icon(
-                                                          onPressed: () {
-                                                            String areaId;
-                                                            FocusScopeNode
-                                                                currentFocus =
-                                                                FocusScope.of(
-                                                                    context);
-
-                                                            if (!currentFocus
-                                                                .hasPrimaryFocus) {
-                                                              currentFocus
-                                                                  .unfocus();
-                                                            }
-
-                                                            if (_formKey
-                                                                .currentState!
-                                                                .validate()) {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .push(
-                                                                      PageRouteBuilder(
-                                                                opaque:
-                                                                    false, // set to false
-                                                                pageBuilder: (_, __, ___) => RemarkPage(
-                                                                    cus_id: custmerId
-                                                                        .toString(),
-                                                                    ser: values
-                                                                            .ordernum[0]
-                                                                        [
-                                                                        'os'],
-                                                                    sid: sid!,
-                                                                    aid: Provider.of<Controller>(
-                                                                            context,
-                                                                            listen: false)
-                                                                        .areaId!),
-                                                              ));
-                                                            }
-                                                          },
-                                                          label: const Text(
-                                                            'Remarks',
-                                                            style: TextStyle(
-                                                                fontSize: 12),
-                                                          ),
-                                                          icon: const Icon(
-                                                            Icons.comment,
-                                                            size: 14,
-                                                          ),
-                                                          style:
-                                                              ElevatedButton
-                                                                  .styleFrom(
-                                                            backgroundColor: const Color
-                                                                .fromARGB(
-                                                                    255,
-                                                                    3,
-                                                                    169,
-                                                                    244),
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10.0),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        // Spacer(),
-                                                        ElevatedButton.icon(
-                                                          onPressed:
-                                                              () async {
-                                                            String areaId;
-
-                                                            print(
-                                                                "widget.areajhabs-----${Provider.of<Controller>(context, listen: false).areaId}");
-
-                                                            // Provider.of<Controller>(
-                                                            //         context,
-                                                            //         listen:
-                                                            //             false)
-                                                            //     .areaSelection(Provider.of<
-                                                            //                 Controller>(
-                                                            //             context,
-                                                            //             listen:
-                                                            //                 false)
-                                                            //         .areaSelecton!);
-
-                                                            print(
-                                                                "prov area--xx---${Provider.of<Controller>(context, listen: false).areaId}");
-
-                                                            FocusScopeNode
-                                                                currentFocus =
-                                                                FocusScope.of(
-                                                                    context);
-
-                                                            if (!currentFocus
-                                                                .hasPrimaryFocus) {
-                                                              currentFocus
-                                                                  .unfocus();
-                                                            }
-
-                                                            if (_formKey
-                                                                .currentState!
-                                                                .validate()) {
-                                                              Provider.of<Controller>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .fetchwallet();
-                                                              final prefs =
-                                                                  await SharedPreferences
-                                                                      .getInstance();
-                                                              String? cuid =
-                                                                  prefs.getString(
-                                                                      'cus_id');
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .push(
-                                                                PageRouteBuilder(
-                                                                  opaque:
-                                                                      false, // set to false
-                                                                  pageBuilder: (_,
-                                                                          __,
-                                                                          ___) =>
-                                                                      CollectionPage(
-                                                                    os: os,
-                                                                    sid: sid,
-                                                                    cuid: custmerId
-                                                                        .toString(),
-                                                                    aid: Provider.of<Controller>(
-                                                                            context,
-                                                                            listen: false)
-                                                                        .areaId,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            }
-                                                          },
-                                                          label: const Text(
-                                                            'Collection',
-                                                            style: TextStyle(
-                                                                fontSize: 12),
-                                                          ),
-                                                          icon: const Icon(
-                                                            Icons.comment,
-                                                            size: 15,
-                                                          ),
-                                                          style:
-                                                              ElevatedButton
-                                                                  .styleFrom(
-                                                            backgroundColor: P_Settings
-                                                                .collectionbuttnColor,
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10.0),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        // Spacer(),
                                                         ElevatedButton.icon(
                                                           icon: const Icon(
                                                             Icons
                                                                 .library_add_check,
-                                                            color:
-                                                                Colors.white,
+                                                            color: Colors.white,
                                                             size: 15.0,
                                                           ),
                                                           label: const Text(
@@ -1289,9 +1160,9 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                             style: TextStyle(
                                                                 fontSize: 12),
                                                           ),
-                                                          onPressed:
-                                                              () async {
-                                                            String oos = "O" "${values.ordernum[0]['os']}";
+                                                          onPressed: () async {
+                                                            String oos = "O"
+                                                                "${values.ordernum[0]['os']}";
                                                             FocusScopeNode
                                                                 currentFocus =
                                                                 FocusScope.of(
@@ -1312,7 +1183,8 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                           false)
                                                                   .fromOrderbagTable_X001(
                                                                       custmerId
-                                                                          .toString(),"sale order");
+                                                                          .toString(),
+                                                                      "sale order");
                                                               // Provider.of<Controller>(
                                                               //         context,
                                                               //         listen:
@@ -1360,34 +1232,34 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                                                       customerId:
                                                                           custmerId
                                                                               .toString(),
-                                                                      areaId: values.areaidFrompopup == null || values.areaidFrompopup!.isEmpty
+                                                                      areaId: values.areaidFrompopup == null ||
+                                                                              values
+                                                                                  .areaidFrompopup!.isEmpty
                                                                           ? Provider.of<Controller>(context, listen: false).areaAutoComplete[
                                                                               0]
                                                                           : Provider.of<Controller>(context, listen: false)
                                                                               .areaidFrompopup!,
                                                                       os: oos,
-                                                                      areaName: values.areaidFrompopup == null || values.areaidFrompopup!.isEmpty
-                                                                          ? Provider.of<Controller>(context, listen: false).areaAutoComplete[
-                                                                              1]
-                                                                          : Provider.of<Controller>(context, listen: false)
-                                                                              .areaSelecton!,
-                                                                      type:
-                                                                          "sale order"),
+                                                                      areaName: values.areaidFrompopup == null ||
+                                                                              values.areaidFrompopup!.isEmpty
+                                                                          ? Provider.of<Controller>(context, listen: false).areaAutoComplete[1]
+                                                                          : Provider.of<Controller>(context, listen: false).areaSelecton!,
+                                                                      type: "sale order"),
                                                                 ),
                                                               );
                                                             }
                                                           },
-                                                          style:
-                                                              ElevatedButton
-                                                                  .styleFrom(
-                                                            backgroundColor: P_Settings
-                                                                .wavecolor,
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            backgroundColor:
+                                                                P_Settings
+                                                                    .wavecolor,
                                                             shape:
                                                                 RoundedRectangleBorder(
                                                               borderRadius:
                                                                   BorderRadius
-                                                                          .circular(
-                                                                      10.0),
+                                                                      .circular(
+                                                                          10.0),
                                                             ),
                                                           ),
                                                         ),
@@ -1399,450 +1271,6 @@ class _OrderFormState extends State<OrderForm> with TickerProviderStateMixin {
                                 SizedBox(
                                   height: size.height * 0.01,
                                 ),
-                                widget.type == "return"
-                                    ? Container()
-                                    : widget.type == "collection"
-                                        ? Container()
-                                        : widget.type == "sales"
-                                            ? Container()
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  ///////////////////// return buttton //////////////////
-                                                  ElevatedButton.icon(
-                                                    icon: const Icon(
-                                                      Icons.library_add_check,
-                                                      color: Colors.white,
-                                                      size: 15.0,
-                                                    ),
-                                                    label: const Text(
-                                                      "Return",
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    ),
-                                                    onPressed: () async {
-                                                      // await OrderAppDB
-                                                      //     .instance
-                                                      //     .deleteFromTableCommonQuery(
-                                                      //         "returnBagTable",
-                                                      //         "");
-                                                      FocusScopeNode
-                                                          currentFocus =
-                                                          FocusScope.of(
-                                                              context);
-
-                                                      if (!currentFocus
-                                                          .hasPrimaryFocus) {
-                                                        currentFocus
-                                                            .unfocus();
-                                                      }
-
-                                                      if (_formKey
-                                                          .currentState!
-                                                          .validate()) {
-                                                        Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .getreturnList(
-                                                                custmerId
-                                                                    .toString(),
-                                                                "orderform");
-                                                        String os = "R" "${values.ordernum[0]["os"]}";
-                                                        Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .countFromTable(
-                                                          "returnBagTable",
-                                                          os,
-                                                          custmerId
-                                                              .toString(),
-                                                        );
-                                                        Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .count = "0";
-
-                                                        Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .fetchProductCompanyList();
-
-                                                        Provider.of<Controller>(
-                                                                context,
-                                                                listen: false)
-                                                            .returnfilterCompany = false;
-
-                                                        Navigator.of(context)
-                                                            .push(
-                                                          PageRouteBuilder(
-                                                            opaque:
-                                                                false, // set to false
-                                                            pageBuilder: (_,
-                                                                    __,
-                                                                    ___) =>
-                                                                ReturnItem(
-                                                              customerId:
-                                                                  custmerId
-                                                                      .toString(),
-                                                              areaId: values.areaidFrompopup ==
-                                                                          null ||
-                                                                      values
-                                                                          .areaidFrompopup!
-                                                                          .isEmpty
-                                                                  ? Provider.of<Controller>(context, listen: false)
-                                                                          .areaAutoComplete[
-                                                                      0]
-                                                                  : Provider.of<Controller>(
-                                                                          context,
-                                                                          listen:
-                                                                              false)
-                                                                      .areaidFrompopup!,
-                                                              os: os,
-                                                              areaName: values.areaidFrompopup ==
-                                                                          null ||
-                                                                      values
-                                                                          .areaidFrompopup!
-                                                                          .isEmpty
-                                                                  ? Provider.of<Controller>(context, listen: false)
-                                                                          .areaAutoComplete[
-                                                                      1]
-                                                                  : Provider.of<Controller>(
-                                                                          context,
-                                                                          listen:
-                                                                              false)
-                                                                      .areaSelecton!,
-                                                              type: "return",
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                    },
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor: P_Settings
-                                                          .returnbuttnColor,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                    .circular(
-                                                                10.0),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  // SizedBox(
-                                                  //   width: size.width * 0.05,
-                                                  // ),
-                                                  //////////////////// balance button ///////////////////
-                                                  SizedBox(
-                                                    width: size.width * 0.02,
-                                                  ),
-                                                  ElevatedButton.icon(
-                                                      icon: const Icon(
-                                                        Icons.currency_rupee,
-                                                        color: Colors.white,
-                                                        size: 15.0,
-                                                      ),
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor: P_Settings
-                                                            .dashbordcl2,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                      .circular(
-                                                                  10.0),
-                                                        ),
-                                                      ),
-                                                      onPressed: () async {
-                                                        if (_formKey
-                                                            .currentState!
-                                                            .validate()) {
-                                                          await Provider.of<
-                                                                      Controller>(
-                                                                  context,
-                                                                  listen:
-                                                                      false)
-                                                              .getBalance(cid,
-                                                                  custmerId);
-                                                          print(
-                                                              "balance value.......${values.balanceModel.ba}...${values.balanceModel.ba.runtimeType}.");
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (BuildContext
-                                                                    context) =>
-                                                                popup.buildPopupDialog(
-                                                                    "",
-                                                                    context,
-                                                                    '\u{20B9}${values.balanceModel.ba!.toStringAsFixed(2)}',
-                                                                    "balance",
-                                                                    0,
-                                                                    "",
-                                                                    "",
-                                                                    ""),
-                                                          );
-                                                        }
-                                                        setState(() {
-                                                          balVisible =
-                                                              !balVisible;
-                                                        });
-
-                                                        print(
-                                                            "cid.........$cid,$custmerId");
-                                                        FocusScopeNode
-                                                            currentFocus =
-                                                            FocusScope.of(
-                                                                context);
-
-                                                        if (!currentFocus
-                                                            .hasPrimaryFocus) {
-                                                          currentFocus
-                                                              .unfocus();
-                                                        }
-                                                      },
-                                                      label: const Text("Balance")),
-                                                  // SizedBox(
-                                                  //   width: size.width * 0.05,
-                                                  // ),
-                                                  widget.type == "sales"
-                                                      ? ElevatedButton.icon(
-                                                          icon: const Icon(
-                                                            Icons.sell,
-                                                            color:
-                                                                Colors.white,
-                                                            size: 15.0,
-                                                          ),
-                                                          label: const Text(
-                                                            "Sales",
-                                                            style: TextStyle(
-                                                                fontSize: 12),
-                                                          ),
-                                                          style:
-                                                              ElevatedButton
-                                                                  .styleFrom(
-                                                            backgroundColor: P_Settings
-                                                                .dashbordcl5,
-                                                            shape:
-                                                                RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                          .circular(
-                                                                      10.0),
-                                                            ),
-                                                          ),
-                                                          onPressed:
-                                                              () async {
-                                                            FocusScopeNode
-                                                                currentFocus =
-                                                                FocusScope.of(
-                                                                    context);
-
-                                                            if (!currentFocus
-                                                                .hasPrimaryFocus) {
-                                                              currentFocus
-                                                                  .unfocus();
-                                                            }
-
-                                                            if (_formKey
-                                                                .currentState!
-                                                                .validate()) {
-                                                              List
-                                                                  customerDet =
-                                                                  await OrderAppDB
-                                                                      .instance
-                                                                      .selectAllcommon(
-                                                                          'accountHeadsTable',
-                                                                          "ac_code='$custmerId'");
-                                                              print(
-                                                                  "customerDet------$customerDet");
-                                                              String os = "S" "${values.ordernum[0]["os"]}";
-                                                              Provider.of<Controller>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .countFromTable(
-                                                                "salesBagTable",
-                                                                os,
-                                                                custmerId
-                                                                    .toString(),
-                                                              );
-                                                              Provider.of<Controller>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .fetchProductCompanyList();
-
-                                                              Provider.of<Controller>(
-                                                                      context,
-                                                                      listen:
-                                                                          false)
-                                                                  .salefilterCompany = false;
-
-                                                              //  os = "S" +
-                                                              //   "${values.ordernum[0]["os"]}";
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .push(
-                                                                PageRouteBuilder(
-                                                                  opaque:
-                                                                      false, // set to false
-                                                                  pageBuilder: (_, __, ___) => SalesItem(
-                                                                      customerId:
-                                                                          custmerId
-                                                                              .toString(),
-                                                                      areaId: values.areaidFrompopup == null || values.areaidFrompopup!.isEmpty
-                                                                          ? Provider.of<Controller>(context, listen: false).areaAutoComplete[
-                                                                              0]
-                                                                          : Provider.of<Controller>(context, listen: false)
-                                                                              .areaidFrompopup!,
-                                                                      os: os,
-                                                                      areaName: values.areaidFrompopup == null || values.areaidFrompopup!.isEmpty
-                                                                          ? Provider.of<Controller>(context, listen: false).areaAutoComplete[
-                                                                              1]
-                                                                          : Provider.of<Controller>(context, listen: false)
-                                                                              .areaSelecton!,
-                                                                      type:
-                                                                          "sale",
-                                                                      gtype: customerDet[0]["gtype"]),
-                                                                ),
-                                                              );
-                                                            }
-                                                          },
-                                                        )
-                                                      : Container(),
-
-                                                  // Container(
-                                                  //   alignment: Alignment.center,
-                                                  //   width: size.width * 0.27,
-                                                  //   height: size.height * 0.03,
-                                                  //   child: ElevatedButton(
-                                                  //       style: ElevatedButton
-                                                  //           .styleFrom(
-                                                  //         primary: P_Settings
-                                                  //             .dashbordcl1,
-                                                  //         shape:
-                                                  //             new RoundedRectangleBorder(
-                                                  //           borderRadius:
-                                                  //               new BorderRadius
-                                                  //                       .circular(
-                                                  //                   10.0),
-                                                  //         ),
-                                                  //       ),
-                                                  //       onPressed: () async {
-                                                  //         FocusScopeNode
-                                                  //             currentFocus =
-                                                  //             FocusScope.of(
-                                                  //                 context);
-
-                                                  //         if (!currentFocus
-                                                  //             .hasPrimaryFocus) {
-                                                  //           currentFocus
-                                                  //               .unfocus();
-                                                  //         }
-
-                                                  //         if (_formKey
-                                                  //             .currentState!
-                                                  //             .validate()) {
-                                                  //           Provider.of<Controller>(
-                                                  //                   context,
-                                                  //                   listen: false)
-                                                  //               .countFromTable(
-                                                  //             "orderBagTable",
-                                                  //             values.ordernum[0]
-                                                  //                 ['os'],
-                                                  //             custmerId
-                                                  //                 .toString(),
-                                                  //           );
-                                                  //           Provider.of<Controller>(
-                                                  //                   context,
-                                                  //                   listen: false)
-                                                  //               .fetchProductCompanyList();
-
-                                                  //           Provider.of<Controller>(
-                                                  //                   context,
-                                                  //                   listen: false)
-                                                  //               .filterCompany = false;
-
-                                                  //           // Provider.of<Controller>(
-                                                  //           //         context,
-                                                  //           //         listen:
-                                                  //           //             false)
-                                                  //           //     .getProductList(
-                                                  //           //         custmerId
-                                                  //           //             .toString());
-                                                  //           Navigator.of(context)
-                                                  //               .push(
-                                                  //             PageRouteBuilder(
-                                                  //               opaque:
-                                                  //                   false, // set to false
-                                                  //               pageBuilder: (_, __, ___) => SalesItem(
-                                                  //                   customerId: custmerId
-                                                  //                       .toString(),
-                                                  //                   areaId: values.areaidFrompopup == null ||
-                                                  //                           values
-                                                  //                               .areaidFrompopup!
-                                                  //                               .isEmpty
-                                                  //                       ? Provider.of<Controller>(context, listen: false).areaAutoComplete[
-                                                  //                           0]
-                                                  //                       : Provider.of<Controller>(context, listen: false)
-                                                  //                           .areaidFrompopup!,
-                                                  //                   os: values.ordernum[0]
-                                                  //                       ['os'],
-                                                  //                   areaName: values.areaidFrompopup == null ||
-                                                  //                           values.areaidFrompopup!.isEmpty
-                                                  //                       ? Provider.of<Controller>(context, listen: false).areaAutoComplete[1]
-                                                  //                       : Provider.of<Controller>(context, listen: false).areaSelecton!,
-                                                  //                   type: "sale"),
-                                                  //             ),
-                                                  //           );
-                                                  //         }
-                                                  //       },
-                                                  //       child: Text("Sales")),
-                                                  // ),
-                                                ],
-                                              ),
-                                // Visibility(
-                                //     visible: customer_visible,
-                                //     child: const Padding(
-                                //       padding:
-                                //           EdgeInsets.only(left: 25, top: 50),
-                                //       child: Text(
-                                //         "Customers",
-                                //         style: TextStyle(
-                                //             fontSize: 15,
-                                //             fontWeight: FontWeight.bold),
-                                //       ),
-                                //     )),
-
-                                // Visibility(
-                                //   visible: customer_visible,
-                                //   child: Expanded(
-                                //     child: Padding(
-                                //       padding: const EdgeInsets.only(
-                                //           left: 10, top: 20),
-                                //       child: ListView.builder(
-                                //         itemCount:
-                                //             values.custmerDetails.length,
-                                //         itemBuilder: (context, index) {
-                                //           return ListTile(
-                                //             visualDensity: VisualDensity(
-                                //                 horizontal: -4, vertical: -4),
-                                //             textColor: Colors.blue,
-                                //             title: Text(
-                                //               "${values.custmerDetails[index]['hname']}",
-                                //               style: TextStyle(fontSize: 13),
-                                //             ),
-                                //             // onTap: (() {
-                                //             //   print("selected index");
-                                //             // }),
-                                //           );
-                                //         },
-                                //       ),
-                                //     ),
-                                //   ),
-                                // )
                               ],
                             ),
                           ),

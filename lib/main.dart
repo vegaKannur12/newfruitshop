@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:orderapp/components/sunmi_screen.dart';
 import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/screen/ORDER/0_splashScreen.dart';
+import 'package:orderapp/screen/SALES/easyLoad.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +16,7 @@ import 'package:ota_update/ota_update.dart';
 import 'screen/ADMIN_/adminController.dart';
 /////////////registration keyyyyyyyyyyyyyyyyy
 //company key----ELZDKU6DSMVO
+///////new key-----4016ZNMNSMVO
 void requestPermission() async {
   var status = await Permission.storage.status;
   // var statusbl= await Permission.bluetooth.status;
@@ -39,7 +42,22 @@ void requestPermission() async {
     await Permission.manageExternalStorage.request();
   }
 }
-
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false;
+    // ..customAnimation = CustomAnimation();
+}
 // void permission()async{
 //   var camstatus = await Permission.camera.status;
 //   var calstatus = await Permission.microphone.status;
@@ -95,6 +113,7 @@ Future<void> main() async {
     ],
     child: MyApp(),
   ));
+  configLoading();
 }
 
 ///////////////////// background run /////////////////////
@@ -130,6 +149,7 @@ class MyApp extends StatelessWidget {
         // ),
       ),
       home: SplashScreen(),
+      builder: EasyLoading.init(),
       // home: MyWaveClipper(),
     );
   }

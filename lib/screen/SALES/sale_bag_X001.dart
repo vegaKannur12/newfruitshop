@@ -412,11 +412,11 @@ class _SaleCartX001State extends State<SaleCartX001> {
                                     Flexible(
                                       flex: 3,
                                       child: Text(
-                                        "${itemName} ",
+                                        "${itemName} ",  
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             color: P_Settings.wavecolor),
                                       ),
                                     ),

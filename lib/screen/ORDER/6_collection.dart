@@ -59,7 +59,12 @@ class _CollectionPageState extends State<CollectionPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       // resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          "COLLECTION",
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+      ),
       body: InkWell(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
@@ -76,302 +81,294 @@ class _CollectionPageState extends State<CollectionPage> {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          "Collection",
-                          style: TextStyle(
-                              color: P_Settings.wavecolor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: size.height * 0.02,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Series",
-                                  style: TextStyle(
-                                    fontSize: 15,
+                        // Text(
+                        //   "Collection",
+                        //   style: TextStyle(
+                        //       color: P_Settings.wavecolor,
+                        //       fontSize: 20,
+                        //       fontWeight: FontWeight.bold),
+                        // ),
+                        // Divider(
+                        //   thickness: 2,
+                        // ),
+                        // SizedBox(
+                        //   height: size.height * 0.02,
+                        // ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Series",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                )),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Container(
+                              width: size.width * 1,
+                              height: size.height * 0.05,
+                              alignment: Alignment.centerLeft,
+                              color: P_Settings.collection,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(widget.os.toString()),
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Text("Date", style: TextStyle(fontSize: 15)),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Container(
+                              width: size.width * 1,
+                              height: size.height * 0.05,
+                              alignment: Alignment.centerLeft,
+                              color: P_Settings.collection,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  formattedDate.toString(),
+                                  style: TextStyle(color: Colors.grey[600]),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Text("Transaction Mode * ",
+                                style: TextStyle(fontSize: 15)),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            // SizedBox(
+                            //   height: size.height * 0.01,
+                            // ),
+                            Container(
+                              color: Colors.grey[200],
+                              // height: size.height * 0.04,
+                              child: DropdownButton<String>(
+                                value: selected,
+                                hint: Text("Select"),
+                                isExpanded: true,
+                                // autofocus: false,
+                                underline: SizedBox(),
+                                elevation: 0,
+                                items: value.walletList
+                                    .map((item) => DropdownMenuItem<String>(
+                                        value: item["waid"].toString(),
+                                        child: Container(
+                                          width: size.width * 0.5,
+                                          child: Padding(
+                                              padding: EdgeInsets.all(5.0),
+                                              child: Text(
+                                                item["wname"].toString(),
+                                                style: TextStyle(fontSize: 13),
+                                              )),
+                                        )))
+                                    .toList(),
+                                onChanged: (item) {
+                                  print("clicked");
+
+                                  if (item != null) {
+                                    setState(() {
+                                      selected = item;
+                                    });
+                                    print("se;ected---$item");
+                                  }
+                                },
+
+                                // disabledHint: Text(selected ?? "null"),
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Text("Amount *", style: TextStyle(fontSize: 15)),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Container(
+                              color: P_Settings.collection,
+                              child: TextFormField(
+                                  style: TextStyle(fontSize: 14),
+                                  controller: amtController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: new InputDecoration(
+                                    border: InputBorder.none,
                                   )),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Container(
-                                  width: size.width * 0.9,
-                                  color: P_Settings.collection,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(widget.os.toString()),
-                                  ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Text("Discount ", style: TextStyle(fontSize: 15)),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Container(
+                              // height: size.height * 0.04,
+                              // width: size.width * 0.9,
+                              color: P_Settings.collection,
+                              child: TextFormField(
+                                  style: TextStyle(fontSize: 14),
+                                  controller: dscController,
+                                  keyboardType: TextInputType.number,
+                                  decoration: new InputDecoration(
+                                    border: InputBorder.none,
+                                  )),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Text("Remarks", style: TextStyle(fontSize: 15)),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            SizedBox(
+                              // width: size.width * 0.9,
+                              child: TextField(
+                                style: TextStyle(fontSize: 14),
+                                controller: noteController,
+                                minLines:
+                                    2, // any number you need (It works as the rows for the textarea)
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      vertical: 30, horizontal: 20),
+                                  border: OutlineInputBorder(),
+                                  labelText: '',
                                 ),
                               ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Text("Date", style: TextStyle(fontSize: 15)),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Container(
-                                  width: size.width * 0.9,
-                                  color: P_Settings.collection,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      formattedDate.toString(),
-                                      style: TextStyle(color: Colors.grey[600]),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Text("Transaction Mode",
-                                  style: TextStyle(fontSize: 15)),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Container(
-                                color: Colors.grey[200],
-                                height: size.height * 0.04,
-                                child: DropdownButton<String>(
-                                  value: selected,
-                                  hint: Text("Select"),
-                                  isExpanded: true,
-                                  // autofocus: false,
-                                  underline: SizedBox(),
-                                  elevation: 0,
-                                  items: value.walletList
-                                      .map((item) => DropdownMenuItem<String>(
-                                          value: item["waid"].toString(),
-                                          child: Container(
-                                            width: size.width * 0.5,
-                                            child: Padding(
-                                                padding: EdgeInsets.all(5.0),
-                                                child: Text(
-                                                  item["wname"].toString(),
-                                                  style:
-                                                      TextStyle(fontSize: 13),
-                                                )),
-                                          )))
-                                      .toList(),
-                                  onChanged: (item) {
-                                    print("clicked");
+                            ),
+                            SizedBox(
+                              height: size.height * 0.02,
+                            ),
+                            Center(
+                              child: Container(
+                                width: size.width * 0.3,
+                                height: size.height * 0.05,
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    String os1 = "C" + "${widget.os}";
+                                    int max = await OrderAppDB.instance
+                                        .calculateMaxSeries('$os1',
+                                            'collectionTable', 'rec_row_num');
+                                    ;
+                                    print("max value in collection....$max");
+                                    final prefs =
+                                        await SharedPreferences.getInstance();
+                                    String? sid = await prefs.getString('sid');
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
+                                    print(
+                                        "hjfhdfhn---${amtController.text}---${dscController.text}");
+                                    //  double sum=double.parse( amtController.text)+double.parse( dscController.text);
 
-                                    if (item != null) {
-                                      setState(() {
-                                        selected = item;
-                                      });
-                                      print("se;ected---$item");
-                                    }
-                                  },
+                                    if (amtController.text.isEmpty &&
+                                            dscController.text.isEmpty ||
+                                        selected == null) {
+                                      visible.value = true;
+                                    } else {
+                                      visible.value = false;
+                                      await OrderAppDB.instance
+                                          .insertCollectionTable(
+                                              s[0],
+                                              s[1],
+                                              widget.cuid!,
+                                              max,
+                                              os1,
+                                              selected!,
+                                              amtController.text,
+                                              dscController.text,
+                                              noteController.text,
+                                              widget.sid!,
+                                              0,
+                                              0);
 
-                                  // disabledHint: Text(selected ?? "null"),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Text("Amount",
-                                    style: TextStyle(fontSize: 15)),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Container(
-                                  height: size.height * 0.04,
-                                  width: size.width * 0.9,
-                                  color: P_Settings.collection,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                        style: TextStyle(fontSize: 14),
-                                        controller: amtController,
-                                        keyboardType: TextInputType.number,
-                                        decoration: new InputDecoration(
-                                          border: InputBorder.none,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Text("Discount", style: TextStyle(fontSize: 15)),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Container(
-                                  height: size.height * 0.04,
-                                  width: size.width * 0.9,
-                                  color: P_Settings.collection,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                        style: TextStyle(fontSize: 14),
-                                        controller: dscController,
-                                        keyboardType: TextInputType.number,
-                                        decoration: new InputDecoration(
-                                          border: InputBorder.none,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Text("Remarks", style: TextStyle(fontSize: 15)),
-                              Padding(
-                                padding: EdgeInsets.only(top: 10),
-                                child: SizedBox(
-                                  width: size.width * 0.9,
-                                  child: TextField(
-                                    style: TextStyle(fontSize: 14),
-                                    controller: noteController,
-                                    minLines:
-                                        2, // any number you need (It works as the rows for the textarea)
-                                    keyboardType: TextInputType.multiline,
-                                    maxLines: null,
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 30, horizontal: 20),
-                                      border: OutlineInputBorder(),
-                                      labelText: '',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: size.height * 0.02,
-                              ),
-                              Center(
-                                child: Container(
-                                  width: size.width * 0.3,
-                                  height: size.height * 0.05,
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      String os1 = "C" + "${widget.os}";
-                                      int max = await OrderAppDB.instance
-                                          .calculateMaxSeries('$os1',
-                                              'collectionTable', 'rec_row_num');
-                                      ;
-                                      print("max value in collection....$max");
-                                      final prefs =
-                                          await SharedPreferences.getInstance();
-                                      String? sid =
-                                          await prefs.getString('sid');
-                                      FocusScope.of(context)
-                                          .requestFocus(FocusNode());
-                                      print(
-                                          "hjfhdfhn---${amtController.text}---${dscController.text}");
-                                      //  double sum=double.parse( amtController.text)+double.parse( dscController.text);
+                                      amtController.clear();
+                                      dscController.clear();
+                                      noteController.clear();
+                                      selected = null;
+                                      Provider.of<Controller>(context,
+                                              listen: false)
+                                          .fetchtotalcollectionFromTable(
+                                              widget.cuid!);
 
-                                      if (amtController.text.isEmpty &&
-                                              dscController.text.isEmpty ||
-                                          selected == null) {
-                                        visible.value = true;
-                                      } else {
-                                        visible.value = false;
-                                        await OrderAppDB.instance
-                                            .insertCollectionTable(
-                                                s[0],
-                                                s[1],
-                                                widget.cuid!,
-                                                max,
-                                                os1,
-                                                selected!,
-                                                amtController.text,
-                                                dscController.text,
-                                                noteController.text,
-                                                widget.sid!,
-                                                0,
-                                                0);
-
-                                        amtController.clear();
-                                        dscController.clear();
-                                        noteController.clear();
-
+                                      if (Provider.of<Controller>(context,
+                                                  listen: false)
+                                              .settingsList1[0]["set_value"] ==
+                                          "YES") {
+                                        print("upload----");
                                         Provider.of<Controller>(context,
                                                 listen: false)
-                                            .fetchtotalcollectionFromTable(
-                                                widget.cuid!);
-
-                                        if (Provider.of<Controller>(context,
-                                                        listen: false)
-                                                    .settingsList1[0]
-                                                ["set_value"] ==
-                                            "YES") {
-                                          print("upload----");
-                                          Provider.of<Controller>(context,
-                                                  listen: false)
-                                              .uploadCollectionData(
-                                                  context, 0, "comomn popup");
-                                        }
-                                        print(
-                                            "value.areaidFrompopup----${value.areaidFrompopup}");
-                                        if (value.areaidFrompopup != null) {
-                                          await Provider.of<Controller>(context,
-                                                  listen: false)
-                                              .dashboardSummery(
-                                                  sid!,
-                                                  s[0],
-                                                  value.areaidFrompopup!,
-                                                  context);
-                                        } else {
-                                          await Provider.of<Controller>(context,
-                                                  listen: false)
-                                              .dashboardSummery(
-                                                  sid!, s[0], "", context);
-                                        }
-
-                                        // Provider.of<Controller>(context,
-                                        //         listen: false)
-                                        //     .mainDashtileValues(sid!, s[0]);
-                                        // Provider.of<Controller>(context,
-                                        //         listen: false)
-                                        //     .mainDashAmounts(sid, s[0]);
-                                        String? gen_area =
-                                            Provider.of<Controller>(context,
-                                                    listen: false)
-                                                .areaidFrompopup;
-                                        if (gen_area != null) {
-                                          gen_condition =
-                                              " and accountHeadsTable.area_id=$gen_area";
-                                        } else {
-                                          gen_condition = " ";
-                                        }
+                                            .uploadCollectionData(
+                                                context, 0, "comomn popup");
+                                      }
+                                      print(
+                                          "value.areaidFrompopup----${value.areaidFrompopup}");
+                                      if (value.areaidFrompopup != null) {
                                         await Provider.of<Controller>(context,
                                                 listen: false)
-                                            .todayCollection(
-                                                s[0], gen_condition!);
-                                        tst.toast("Saved");
+                                            .dashboardSummery(
+                                                sid!,
+                                                s[0],
+                                                value.areaidFrompopup!,
+                                                context);
+                                      } else {
+                                        await Provider.of<Controller>(context,
+                                                listen: false)
+                                            .dashboardSummery(
+                                                sid!, s[0], "", context);
                                       }
-                                    },
-                                    child: Text('Save'),
-                                  ),
+
+                                      // Provider.of<Controller>(context,
+                                      //         listen: false)
+                                      //     .mainDashtileValues(sid!, s[0]);
+                                      // Provider.of<Controller>(context,
+                                      //         listen: false)
+                                      //     .mainDashAmounts(sid, s[0]);
+                                      String? gen_area =
+                                          Provider.of<Controller>(context,
+                                                  listen: false)
+                                              .areaidFrompopup;
+                                      if (gen_area != null) {
+                                        gen_condition =
+                                            " and accountHeadsTable.area_id=$gen_area";
+                                      } else {
+                                        gen_condition = " ";
+                                      }
+                                      await Provider.of<Controller>(context,
+                                              listen: false)
+                                          .todayCollection(
+                                              s[0], gen_condition!);
+                                      tst.toast("Saved");
+                                    }
+                                  },
+                                  child: Text('Save'),
                                 ),
                               ),
-                              SizedBox(
-                                height: size.height * 0.01,
-                              ),
-                              Center(
-                                child: ValueListenableBuilder(
-                                    valueListenable: visible,
-                                    builder: (BuildContext context, bool v,
-                                        Widget? child) {
-                                      print("value===${visible.value}");
-                                      return Visibility(
-                                        visible: v,
-                                        child: Text(
-                                          "Please fill corresponding fields!!!",
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      );
-                                    }),
-                              ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.01,
+                            ),
+                            Center(
+                              child: ValueListenableBuilder(
+                                  valueListenable: visible,
+                                  builder: (BuildContext context, bool v,
+                                      Widget? child) {
+                                    print("value===${visible.value}");
+                                    return Visibility(
+                                      visible: v,
+                                      child: Text(
+                                        "Please fill corresponding fields!!!",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ],
                         ),
                         Visibility(
                           visible: value.fetchcollectionList.length == 0

@@ -2688,15 +2688,15 @@ class Controller extends ChangeNotifier {
 
     print("customerCount----$customerCount");
     orderCount = res[0]["ordCnt"].toString();
-    // salesCount = res[0]["saleCnt"];
+    salesCount = res[0]["saleCnt"].toString();
     // collectionCount = res[0]["colCnt"].toString();
     // print("collectioncount...$collectionCount");
     // remarkCount = res[0]["rmCnt"].toString();
     // print("remarkCount...$remarkCount");
     // ret_count = res[0]["retCnt"].toString();
-    // cs_cnt = res[0]["saleCntCS"];
+    cs_cnt = res[0]["saleCntCS"].toString();
     cs_amt = res[0]["saleValCS"].toString();
-    // cr_cnt = res[0]["saleCntCR"];
+    cr_cnt = res[0]["saleCntCR"].toString();
     cr_amt = res[0]["saleValCR"].toString();
   //   if(cs_cnt==null){
   //     cs_cnt="0";

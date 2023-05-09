@@ -1088,8 +1088,7 @@ class OrderAppDB {
     final db = await database;
     var res2;
     var res3;
-    print(
-        "total quantity......$payment_mode...$credit_option");
+    print("total quantity......$payment_mode...$credit_option");
     if (table == "salesDetailTable") {
       var query2 =
           'INSERT INTO salesDetailTable(os, sales_id, row_num,hsn , item_name , code, qty, unit , gross_amount, dis_amt, dis_per, tax_amt, tax_per, cgst_per, cgst_amt, sgst_per, sgst_amt, igst_per, igst_amt, ces_amt, ces_per, net_amt, rate, unit_rate, packing, baserate) VALUES("${os}", ${sales_id}, ${rowNum},"${hsn}", "${item_name}", "${code}", ${qty}, "${unit}", $gross_amount, $dis_amt, ${dis_per}, ${tax_amt.toStringAsFixed(3)}, $tax_per, ${cgst_per}, ${cgst_amt.toStringAsFixed(3)}, ${sgst_per}, ${sgst_amt.toStringAsFixed(3)}, ${igst_per}, ${igst_amt.toStringAsFixed(3)}, $ces_amt, $ces_per, $total_price, $rate, $unit_rate, $packing, $base_rate)';
@@ -2394,8 +2393,28 @@ class OrderAppDB {
     List<Map<String, dynamic>> result;
     print("conditon----$condition");
     Database db = await instance.database;
-    var query =
-        'select accountHeadsTable.hname as cus_name,orderMasterTable.order_id, orderMasterTable.os  || orderMasterTable.order_id as Order_Num,orderMasterTable.customerid Cus_id,orderMasterTable.orderdate Date, count(orderDetailTable.row_num) count, orderMasterTable.total_price  from orderMasterTable inner join orderDetailTable on orderMasterTable.order_id=orderDetailTable.order_id inner join accountHeadsTable on accountHeadsTable.ac_code= orderMasterTable.customerid where orderMasterTable.orderdate="${date}"  $condition group by orderMasterTable.order_id';
+    // var query = 'select accountHeadsTable.hname as cus_name,' +
+    //     ' orderMasterTable.order_id, orderMasterTable.os ' +
+    //     ' || orderMasterTable.order_id as Order_Num,orderMasterTable.customerid ' +
+    //     ' Cus_id,orderMasterTable.orderdate Date, count(orderDetailTable.row_num) count, ' +
+    //     ' orderMasterTable.total_price ,orderDetailTable.item, orderDetailTable.qty, orderDetailTable.rate ' +
+    //     ' from orderMasterTable inner join orderDetailTable ' +
+    //     ' on orderMasterTable.order_id=orderDetailTable.order_id left join accountHeadsTable ' +
+    //     ' on accountHeadsTable.ac_code= orderMasterTable.customerid ' +
+    //     ' where orderMasterTable.orderdate="${date}"  $condition ' +
+    //     ' group by orderMasterTable.order_id';
+
+    var query = 'select accountHeadsTable.hname as cus_name,' +
+        ' orderMasterTable.order_id, orderMasterTable.os ' +
+        ' || orderMasterTable.order_id as Order_Num,orderMasterTable.customerid ' +
+        ' Cus_id,orderMasterTable.orderdate Date, count(orderDetailTable.row_num) count, ' +
+        ' orderMasterTable.total_price ,orderDetailTable.item, orderDetailTable.qty, orderDetailTable.rate ' +
+        ' from orderMasterTable inner join orderDetailTable ' +
+        ' on orderMasterTable.order_id=orderDetailTable.order_id INNER join accountHeadsTable ' +
+        ' on accountHeadsTable.ac_code= orderMasterTable.customerid ' +
+        ' where orderMasterTable.orderdate="${date}"  $condition ' +
+        ' group by orderMasterTable.order_id';
+
     print("query---$query");
     result = await db.rawQuery(query);
     print("inner result------$result");
@@ -3047,6 +3066,19 @@ class OrderAppDB {
   executeQuery(String query) async {
     Database db = await instance.database;
     var result = await db.rawQuery(query);
+    return result;
+  }
+
+  printOrderDetailTable(String data) async {
+    List s = data.split(" ");
+    print("date-vvv-----${s[0]}");
+    Database db = await instance.database;
+    var qry =
+        "SELECT item,qty,rate from orderDetailTable inner join orderMasterTable" +
+            "  on orderMasterTable.order_id =orderDetailTable.order_id where orderMasterTable.orderdate = '${s[0]}' ";
+            print("print order----$qry");
+    var result = await db.rawQuery(qry);
+    print("jchjc---$result");
     return result;
   }
 }
