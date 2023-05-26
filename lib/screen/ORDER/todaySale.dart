@@ -4,15 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:orderapp/components/commoncolor.dart';
-import 'package:orderapp/components/printingSale.dart';
 import 'package:orderapp/components/sunmi.dart';
-import 'package:orderapp/components/sunmi_screen.dart';
 import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/db_helper.dart';
 import 'package:orderapp/screen/ORDER/DateFinder.dart';
 import 'package:orderapp/screen/ORDER/pdfPrev.dart';
 import 'package:orderapp/screen/historydataPopup.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

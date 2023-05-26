@@ -1,13 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:orderapp/components/sunmi_screen.dart';
 import 'package:orderapp/controller/controller.dart';
 import 'package:orderapp/screen/ORDER/0_splashScreen.dart';
-import 'package:orderapp/screen/SALES/easyLoad.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

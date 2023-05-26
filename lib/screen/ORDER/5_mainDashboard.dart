@@ -169,7 +169,7 @@ class _MainDashboardState extends State<MainDashboard> {
                               top: 4.0, left: 8, right: 8),
                           child: Card(
                             elevation: 4,
-                            color: Color.fromARGB(255, 240, 237, 237),
+                            color: Color.fromARGB(255, 250, 248, 248),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ListTile(
@@ -208,7 +208,7 @@ class _MainDashboardState extends State<MainDashboard> {
                               top: 4.0, left: 8, right: 8),
                           child: Card(
                             elevation: 4,
-                            color: Color.fromARGB(255, 240, 237, 237),
+                            color: Color.fromARGB(255, 250, 248, 248),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ListTile(
@@ -238,7 +238,7 @@ class _MainDashboardState extends State<MainDashboard> {
                               top: 4.0, left: 8, right: 8),
                           child: Card(
                             elevation: 4,
-                            color: Color.fromARGB(255, 240, 237, 237),
+                            color: Color.fromARGB(255, 250, 248, 248),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ListTile(
@@ -270,7 +270,7 @@ class _MainDashboardState extends State<MainDashboard> {
                           padding: const EdgeInsets.only(
                               top: 4.0, left: 8, right: 8),
                           child: Card(
-                            color: Color.fromARGB(255, 240, 237, 237),
+                            color: Color.fromARGB(255, 250, 248, 248),
                             elevation: 4,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -401,7 +401,7 @@ class _MainDashboardState extends State<MainDashboard> {
                               child: customcard(
                                   size,
                                   "Cash Sale",
-                                  "${value.cs_cnt == null ? "0" : value.cs_cnt}" +
+                                  "${value.cs_cnt == "null" ? "0" : value.cs_cnt}" +
                                       "/" +
                                       "\u{20B9}${value.cashSaleAmt == "null" ? "0.0" : value.cashSaleAmt}"),
                             ),
@@ -410,7 +410,7 @@ class _MainDashboardState extends State<MainDashboard> {
                               child: customcard(
                                   size,
                                   "Credit Sale",
-                                  "${value.cr_cnt == null ? "0" : value.cr_cnt}" +
+                                  "${value.cr_cnt == "null" ? "0" : value.cr_cnt}" +
                                       "/" +
                                       "\u{20B9}${value.creditSaleAmt == "null" ? "0.00" : value.creditSaleAmt}"),
                             ),
@@ -424,14 +424,23 @@ class _MainDashboardState extends State<MainDashboard> {
                               child: customcard(
                                   size,
                                   "Sales",
-                                  "${value.salesCount == null ? "0" : value.salesCount}" +
+                                  "${value.salesCount == "null" ? "0" : value.salesCount}" +
                                       "/" +
                                       "\u{20B9}${value.salesAmount == "null" ? "0.0" : value.salesAmount}"),
                             ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(0),
+                            //   child: customcard(size, "Collection",
+                            //       "\u{20B9}${value.collectionAmount == "null" ? "0.00" : value.collectionAmount}"),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.all(0),
-                              child: customcard(size, "Collection",
-                                  "\u{20B9}${value.collectionAmount == "null" ? "0.00" : value.collectionAmount}"),
+                              child: customcard(
+                                  size,
+                                  "Order",
+                                  "${value.orderCount == "null" ? "0" : value.orderCount}" +
+                                      "/" +
+                                      "\u{20B9}${value.ordrAmount == "null" ? "0.00" : value.ordrAmount}"),
                             ),
                           ],
                         ),
@@ -560,7 +569,7 @@ class _MainDashboardState extends State<MainDashboard> {
         // color: Colors.black,
         color: title == "Cash Sale"
             ? P_Settings.dashbordcl1
-            : title == "Collection"
+            : title == "Order"
                 ? P_Settings.dashbordcl2
                 : title == "Sales"
                     ? P_Settings.dashbordcl3
@@ -584,9 +593,9 @@ class _MainDashboardState extends State<MainDashboard> {
                         height: size.height * 0.1,
                         width: size.width * 0.12,
                       )
-                    : title == "Collection"
+                    : title == "Order"
                         ? Image.asset(
-                            "asset/collection.png",
+                            "asset/order.png",
                             height: size.height * 0.1,
                             width: size.width * 0.12,
                           )
