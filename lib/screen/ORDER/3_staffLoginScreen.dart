@@ -318,7 +318,7 @@ class StaffLogin extends StatelessWidget {
                                                   'LOGIN',
                                                   style: TextStyle(
                                                     color: Colors.white,
-                                                    fontSize: 20,
+                                                    fontSize: 15,
                                                   ),
                                                 ),
                                                 Icon(

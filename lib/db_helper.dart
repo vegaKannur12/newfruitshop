@@ -2512,7 +2512,6 @@ class OrderAppDB {
     return result;
   }
 
-////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
   selectAllcommon(String table, String? condition) async {
     print("haiiiii");
@@ -3076,7 +3075,7 @@ class OrderAppDB {
     var qry =
         "SELECT item,qty,rate from orderDetailTable inner join orderMasterTable" +
             "  on orderMasterTable.order_id =orderDetailTable.order_id where orderMasterTable.orderdate = '${s[0]}' ";
-            print("print order----$qry");
+    print("print order----$qry");
     var result = await db.rawQuery(qry);
     print("jchjc---$result");
     return result;

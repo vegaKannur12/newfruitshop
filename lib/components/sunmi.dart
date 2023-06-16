@@ -47,6 +47,7 @@ class Sunmi {
 //////////////////////////////////////////////////////////////////////////////////////////////////
   Future<void> printHeader(
       Map<String, dynamic> printSalesData, String payment_mode) async {
+    // print("pri")
     String? billType;
     if (payment_mode == "-2") {
       billType = "CASH BILL";
@@ -277,16 +278,28 @@ class Sunmi {
     ]);
     await SunmiPrinter.printRow(cols: [
       ColumnMaker(
-        text: "Balance",
+        text: "Tax Amount",
         width: 14,
         align: SunmiPrintAlign.LEFT,
       ),
       ColumnMaker(
-        text: "${printSalesData["master"]["ba"].toStringAsFixed(2)}",
+        text: "${printSalesData["master"]["taxtot"].toStringAsFixed(2)}",
         width: 16,
         align: SunmiPrintAlign.RIGHT,
       ),
     ]);
+    // await SunmiPrinter.printRow(cols: [
+    //   ColumnMaker(
+    //     text: "Balance",
+    //     width: 14,
+    //     align: SunmiPrintAlign.LEFT,
+    //   ),
+    //   ColumnMaker(
+    //     text: "${printSalesData["master"]["ba"].toStringAsFixed(2)}",
+    //     width: 16,
+    //     align: SunmiPrintAlign.RIGHT,
+    //   ),
+    // ]);
     // await SunmiPrinter.printText("Grand Total : ${printSalesData["master"]["net_amt"].toStringAsFixed(2)}",
     //     style: SunmiStyle(
     //       fontSize: SunmiFontSize.MD,

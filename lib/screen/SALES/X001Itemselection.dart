@@ -353,7 +353,8 @@ class _SalesItemState extends State<SalesItem> {
                                                           listen: false)
                                                       .salefilteredeValue!,
                                                   "sales",
-                                                  value.salesitemList2,"sales")
+                                                  value.salesitemList2,
+                                                  "sales")
                                           : Provider.of<Controller>(context,
                                                   listen: false)
                                               .searchProcess_X001(
@@ -361,7 +362,8 @@ class _SalesItemState extends State<SalesItem> {
                                                   widget.os,
                                                   "",
                                                   "sales",
-                                                  value.salesitemList2,"sales");
+                                                  value.salesitemList2,
+                                                  "sales");
                                     }),
                                 IconButton(
                                     icon: Icon(
@@ -372,7 +374,7 @@ class _SalesItemState extends State<SalesItem> {
                                       Provider.of<Controller>(context,
                                               listen: false)
                                           .fromSalesbagTable_X001(
-                                              widget.customerId,"sales");
+                                              widget.customerId, "sales");
                                       Provider.of<Controller>(context,
                                               listen: false)
                                           .setIssearch(false);
@@ -592,32 +594,34 @@ class _SalesItemState extends State<SalesItem> {
                                                         Flexible(
                                                           flex: 5,
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                             children: [
-                                                              Text(
-                                                                '${value.newList[index]["pritem"]}' +
-                                                                    '- ' +
-                                                                    '${value.newList[index]["prcode"]}',
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                style: TextStyle(
-                                                                    // color: value.newList[index]
-                                                                    //             [
-                                                                    //             "cartrowno"] ==
-                                                                    //         null
-                                                                    //     ? value.selected[
-                                                                    //             index]
-                                                                    //         ? Colors
-                                                                    //             .black
-                                                                    //         : Colors
-                                                                    //             .black
-                                                                    //     : Colors
-                                                                    //         .black,
-                                                                    fontSize: 15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
+                                                              Flexible(
+                                                                child: Text(
+                                                                  '${value.newList[index]["pritem"]}' +
+                                                                      '- ' +
+                                                                      '( ${value.newList[index]["prcode"]} )',
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  style: TextStyle(
+                                                                      // color: value.newList[index]
+                                                                      //             [
+                                                                      //             "cartrowno"] ==
+                                                                      //         null
+                                                                      //     ? value.selected[
+                                                                      //             index]
+                                                                      //         ? Colors
+                                                                      //             .black
+                                                                      //         : Colors
+                                                                      //             .black
+                                                                      //     : Colors
+                                                                      //         .black,
+                                                                      fontSize: 15,
+                                                                      fontWeight: FontWeight.bold),
+                                                                ),
                                                               ),
                                                               // value.newList[index]
                                                               //             [
@@ -1194,32 +1198,34 @@ class _SalesItemState extends State<SalesItem> {
                                                         Flexible(
                                                           flex: 5,
                                                           child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
                                                             children: [
-                                                              Text(
-                                                                '${value.salesitemList2[index]["pritem"]}' +
-                                                                    '- ' +
-                                                                    '${value.salesitemList2[index]["prcode"]}',
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                style: TextStyle(
-                                                                    // color: value.salesitemList2[index]
-                                                                    //             [
-                                                                    //             "cartrowno"] ==
-                                                                    //         null
-                                                                    //     ? value.selected[
-                                                                    //             index]
-                                                                    //         ? Colors
-                                                                    //             .black
-                                                                    //         : Colors
-                                                                    //             .black
-                                                                    //     : Colors
-                                                                    //         .black,
-                                                                    fontSize: 15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
+                                                              Flexible(
+                                                                child: Text(
+                                                                  '${value.salesitemList2[index]["pritem"]}' +
+                                                                      '- ' +
+                                                                      '( ${value.salesitemList2[index]["prcode"]} )',
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  style: TextStyle(
+                                                                      // color: value.salesitemList2[index]
+                                                                      //             [
+                                                                      //             "cartrowno"] ==
+                                                                      //         null
+                                                                      //     ? value.selected[
+                                                                      //             index]
+                                                                      //         ? Colors
+                                                                      //             .black
+                                                                      //         : Colors
+                                                                      //             .black
+                                                                      //     : Colors
+                                                                      //         .black,
+                                                                      fontSize: 15,
+                                                                      fontWeight: FontWeight.bold),
+                                                                ),
                                                               ),
                                                               // value.salesitemList2[index]
                                                               //             [

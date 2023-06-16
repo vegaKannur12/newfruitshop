@@ -73,12 +73,14 @@ class CoconutSheet {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        item,
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green),
+                                      Flexible(
+                                        child: Text(
+                                          item,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green),
+                                        ),
                                       ),
                                       Text("-"),
                                       Text(

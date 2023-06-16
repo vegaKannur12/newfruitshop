@@ -322,7 +322,7 @@ class Controller extends ChangeNotifier {
           print("fp----- $fp");
           print("sof----${sof}");
           if (sof == "1") {
-            if (appType == 'VO') {
+            if (appType == 'SM') {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               prefs.setString("company_id", company_code);
               /////////////// insert into local db /////////////////////
@@ -2698,21 +2698,21 @@ class Controller extends ChangeNotifier {
     cs_amt = res[0]["saleValCS"].toString();
     cr_cnt = res[0]["saleCntCR"].toString();
     cr_amt = res[0]["saleValCR"].toString();
-  //   if(cs_cnt==null){
-  //     cs_cnt="0";
-  //   }else{
-  //      cs_cnt = res[0]["saleCntCS"].toString();
-  //   }
-  //    if(cr_cnt==null){
-  //     cr_cnt="0";
-  //   }else{
-  //      cr_cnt = res[0]["saleCntCR"].toString();
-  //   }
-  //  if(salesCount==null){
-  //     salesCount="0";
-  //   }else{
-  //      salesCount = res[0]["saleCnt"].toString();
-  //   }
+    //   if(cs_cnt==null){
+    //     cs_cnt="0";
+    //   }else{
+    //      cs_cnt = res[0]["saleCntCS"].toString();
+    //   }
+    //    if(cr_cnt==null){
+    //     cr_cnt="0";
+    //   }else{
+    //      cr_cnt = res[0]["saleCntCR"].toString();
+    //   }
+    //  if(salesCount==null){
+    //     salesCount="0";
+    //   }else{
+    //      salesCount = res[0]["saleCnt"].toString();
+    //   }
 
     print("jhfjsd-----${res[0]["colVal"]}--${res[0]["ordVal"]}");
     if (res[0]["colVal"] != null) {
@@ -2764,7 +2764,6 @@ class Controller extends ChangeNotifier {
       }
     }
     cashSaleAmt = d4.toStringAsFixed(2);
-
 
     shopVisited = res[0]["cusCount"];
     if (customerCount == null) {

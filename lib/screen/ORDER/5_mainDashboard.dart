@@ -164,58 +164,62 @@ class _MainDashboardState extends State<MainDashboard> {
                             ),
                           ],
                         ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(
+                        //       top: 4.0, left: 8, right: 8),
+                        //   child: Card(
+                        //     elevation: 4,
+                        //     color: Color.fromARGB(255, 250, 248, 248),
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: ListTile(
+                        //         leading: Image.asset(
+                        //           "asset/order.png",
+                        //           height: size.height * 0.058,
+                        //         ),
+                        //         title: Text(
+                        //           "SALE ORDER",
+                        //           style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 13),
+                        //         ),
+                        //         onTap: () {
+                        //           // if (widget.type == "return from cartList") {
+                        //           //   return OrderForm(
+                        //           //       widget.areaName!, "sale order");
+                        //           // } else if (widget.type ==
+                        //           //     "Product return confirmed") {
+                        //           //   return OrderForm(widget.areaName!, "");
+                        //           // } else {
+                        //           //   return OrderForm("", "");
+                        //           // }
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                   builder: (context) =>
+                        //                       OrderForm("", "sale order")));
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 4.0, left: 8, right: 8),
                           child: Card(
-                            elevation: 4,
-                            color: Color.fromARGB(255, 250, 248, 248),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                leading: Image.asset(
-                                  "asset/order.png",
-                                  height: size.height * 0.058,
-                                ),
-                                title: Text(
-                                  "SALE ORDER",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13),
-                                ),
-                                onTap: () {
-                                  // if (widget.type == "return from cartList") {
-                                  //   return OrderForm(
-                                  //       widget.areaName!, "sale order");
-                                  // } else if (widget.type ==
-                                  //     "Product return confirmed") {
-                                  //   return OrderForm(widget.areaName!, "");
-                                  // } else {
-                                  //   return OrderForm("", "");
-                                  // }
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              OrderForm("", "sale order")));
-                                },
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              side: BorderSide(
+                                color: Color.fromARGB(255, 206, 203, 203),
+                                width:2.0,
                               ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 4.0, left: 8, right: 8),
-                          child: Card(
-                            elevation: 4,
-                            color: Color.fromARGB(255, 250, 248, 248),
+                            // color: Color.fromARGB(255, 250, 248, 248),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ListTile(
-                                leading: Image.asset(
-                                  "asset/sales.png",
-                                  height: size.height * 0.058,
-                                ),
+                                leading:CircleAvatar(backgroundImage: AssetImage("asset/sales.png",),),
                                 title: Text(
                                   "SALES ENTRY",
                                   style: TextStyle(
@@ -233,69 +237,69 @@ class _MainDashboardState extends State<MainDashboard> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 4.0, left: 8, right: 8),
-                          child: Card(
-                            elevation: 4,
-                            color: Color.fromARGB(255, 250, 248, 248),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                leading: Image.asset(
-                                  "asset/customer.png",
-                                  height: size.height * 0.058,
-                                ),
-                                title: Text(
-                                  "CUSTOMER CREATION",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => CustomerCreation(
-                                          sid: sid!,
-                                          os: os,
-                                        ),
-                                      ));
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 4.0, left: 8, right: 8),
-                          child: Card(
-                            color: Color.fromARGB(255, 250, 248, 248),
-                            elevation: 4,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                leading: Image.asset(
-                                  "asset/collector.png",
-                                  height: size.height * 0.058,
-                                ),
-                                title: Text(
-                                  "COLLECTION ENTRY",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13),
-                                ),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              OrderForm("", "collection")));
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(
+                        //       top: 4.0, left: 8, right: 8),
+                        //   child: Card(
+                        //     elevation: 4,
+                        //     color: Color.fromARGB(255, 250, 248, 248),
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: ListTile(
+                        //         leading: Image.asset(
+                        //           "asset/customer.png",
+                        //           height: size.height * 0.058,
+                        //         ),
+                        //         title: Text(
+                        //           "CUSTOMER CREATION",
+                        //           style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 13),
+                        //         ),
+                        //         onTap: () {
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                 builder: (context) => CustomerCreation(
+                        //                   sid: sid!,
+                        //                   os: os,
+                        //                 ),
+                        //               ));
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(
+                        //       top: 4.0, left: 8, right: 8),
+                        //   child: Card(
+                        //     color: Color.fromARGB(255, 250, 248, 248),
+                        //     elevation: 4,
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.all(8.0),
+                        //       child: ListTile(
+                        //         leading: Image.asset(
+                        //           "asset/collector.png",
+                        //           height: size.height * 0.058,
+                        //         ),
+                        //         title: Text(
+                        //           "COLLECTION ENTRY",
+                        //           style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 13),
+                        //         ),
+                        //         onTap: () {
+                        //           Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                   builder: (context) =>
+                        //                       OrderForm("", "collection")));
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         // Padding(
                         //   padding: const EdgeInsets.all(8.0),
                         //   child: Row(
